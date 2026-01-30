@@ -1,9 +1,500 @@
+import { useEffect, useRef } from 'react'
+import anime from 'animejs'
 import './App.css'
 
 function App() {
+  const heroRef = useRef(null)
+  const headerRef = useRef(null)
+  const aboutRef = useRef(null)
+  const educationRef = useRef(null)
+  const presentationRef = useRef(null)
+  const skillsRef = useRef(null)
+  const experienceRef = useRef(null)
+  const projectsRef = useRef(null)
+  const contactRef = useRef(null)
+  const footerRef = useRef(null)
+
+  useEffect(() => {
+    // Check if anime is available
+    if (typeof anime === 'undefined') {
+      console.warn('animejs is not installed. Please run: npm install animejs')
+      return
+    }
+
+    // Header animation
+    anime({
+      targets: '.logo',
+      opacity: [0, 1],
+      translateY: [-20, 0],
+      duration: 800,
+      easing: 'easeOutExpo'
+    })
+
+    anime({
+      targets: '.nav a',
+      opacity: [0, 1],
+      translateY: [-15, 0],
+      delay: anime.stagger(100, { start: 200 }),
+      duration: 600,
+      easing: 'easeOutExpo'
+    })
+
+    // Hero section animations
+    anime({
+      targets: '.hero-eyebrow',
+      opacity: [0, 1],
+      translateX: [-30, 0],
+      duration: 800,
+      delay: 300,
+      easing: 'easeOutExpo'
+    })
+
+    anime({
+      targets: '.accent-dot',
+      scale: [0, 1.5, 1],
+      opacity: [0, 1],
+      duration: 600,
+      delay: 800,
+      easing: 'easeOutElastic(1, .8)'
+    })
+
+    anime({
+      targets: '.hero-subtitle',
+      opacity: [0, 1],
+      translateX: [-30, 0],
+      duration: 800,
+      delay: 500,
+      easing: 'easeOutExpo'
+    })
+
+    anime({
+      targets: '.hero-title-inline',
+      opacity: [0, 1],
+      scale: [0.8, 1],
+      duration: 900,
+      delay: 700,
+      easing: 'easeOutElastic(1, .6)'
+    })
+
+    anime({
+      targets: '.hero-description',
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 800,
+      delay: 900,
+      easing: 'easeOutExpo'
+    })
+
+    anime({
+      targets: '.btn',
+      opacity: [0, 1],
+      scale: [0.9, 1],
+      delay: anime.stagger(150, { start: 1100 }),
+      duration: 600,
+      easing: 'easeOutElastic(1, .8)'
+    })
+
+    anime({
+      targets: '.hero-tech-strip span',
+      opacity: [0, 1],
+      scale: [0, 1],
+      delay: anime.stagger(80, { start: 1400 }),
+      duration: 500,
+      easing: 'easeOutElastic(1, .5)'
+    })
+
+    // Hero portrait animation
+    anime({
+      targets: '.hero-portrait-ring',
+      scale: [0, 1],
+      opacity: [0, 1],
+      duration: 1200,
+      delay: 600,
+      easing: 'easeOutExpo'
+    })
+
+    anime({
+      targets: '.hero-portrait',
+      scale: [0, 1],
+      opacity: [0, 1],
+      duration: 1000,
+      delay: 800,
+      easing: 'easeOutElastic(1, .6)'
+    })
+
+    // Scroll-triggered animations using Intersection Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    }
+
+    // Track which sections have been animated to prevent re-animation
+    const animatedSections = new Set()
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !animatedSections.has(entry.target)) {
+          animatedSections.add(entry.target)
+          const target = entry.target
+
+          // About section
+          if (target.classList.contains('about')) {
+            anime({
+              targets: '.service',
+              opacity: [0, 1],
+              translateX: [-50, 0],
+              delay: anime.stagger(150),
+              duration: 800,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.about-content h2',
+              opacity: [0, 1],
+              translateY: [-20, 0],
+              duration: 700,
+              delay: 200,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.about-content p',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              delay: anime.stagger(100, { start: 400 }),
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.stat',
+              opacity: [0, 1],
+              scale: [0.8, 1],
+              delay: anime.stagger(100, { start: 700 }),
+              duration: 600,
+              easing: 'easeOutElastic(1, .8)'
+            })
+          }
+
+          // Education section
+          if (target.classList.contains('section') && target.id === 'education') {
+            anime({
+              targets: '.section-header',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '#education .info-card',
+              opacity: [0, 1],
+              translateY: [50, 0],
+              scale: [0.9, 1],
+              delay: anime.stagger(150, { start: 300 }),
+              duration: 800,
+              easing: 'easeOutElastic(1, .6)'
+            })
+          }
+
+          // Presentation section
+          if (target.id === 'presentation') {
+            anime({
+              targets: '#presentation .section-header',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '#presentation .info-card',
+              opacity: [0, 1],
+              translateX: [-50, 0],
+              scale: [0.95, 1],
+              duration: 800,
+              delay: 300,
+              easing: 'easeOutElastic(1, .6)'
+            })
+          }
+
+          // Skills section
+          if (target.id === 'skills') {
+            anime({
+              targets: '#skills .section-header',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '#skills .info-card',
+              opacity: [0, 1],
+              scale: [0.8, 1],
+              rotateY: [15, 0],
+              delay: anime.stagger(100, { start: 300 }),
+              duration: 700,
+              easing: 'easeOutElastic(1, .7)'
+            })
+
+            anime({
+              targets: '#skills .chip',
+              opacity: [0, 1],
+              scale: [0, 1],
+              delay: anime.stagger(30, { start: 800 }),
+              duration: 400,
+              easing: 'easeOutElastic(1, .5)'
+            })
+          }
+
+          // Experience section
+          if (target.id === 'experience') {
+            anime({
+              targets: '#experience .section-header',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.timeline-marker',
+              scale: [0, 1],
+              opacity: [0, 1],
+              delay: anime.stagger(200, { start: 300 }),
+              duration: 600,
+              easing: 'easeOutElastic(1, .8)'
+            })
+
+            anime({
+              targets: '.timeline-card',
+              opacity: [0, 1],
+              translateX: [-50, 0],
+              delay: anime.stagger(200, { start: 400 }),
+              duration: 800,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.timeline-card li',
+              opacity: [0, 1],
+              translateX: [-20, 0],
+              delay: anime.stagger(50, { start: 800 }),
+              duration: 500,
+              easing: 'easeOutExpo'
+            })
+          }
+
+          // Projects section
+          if (target.classList.contains('projects')) {
+            anime({
+              targets: '.projects h2',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.project-card',
+              opacity: [0, 1],
+              translateY: [50, 0],
+              scale: [0.9, 1],
+              delay: anime.stagger(150, { start: 300 }),
+              duration: 800,
+              easing: 'easeOutElastic(1, .6)'
+            })
+
+            anime({
+              targets: '.project-tags li',
+              opacity: [0, 1],
+              scale: [0, 1],
+              delay: anime.stagger(40, { start: 800 }),
+              duration: 400,
+              easing: 'easeOutElastic(1, .5)'
+            })
+          }
+
+          // Contact section
+          if (target.classList.contains('contact')) {
+            anime({
+              targets: '.contact-header-wrapper h2',
+              opacity: [0, 1],
+              translateX: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.contact-subtitle',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 700,
+              delay: 200,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.contact-highlight',
+              opacity: [0, 1],
+              scale: [0.95, 1],
+              translateY: [30, 0],
+              duration: 900,
+              delay: 400,
+              easing: 'easeOutElastic(1, .7)'
+            })
+
+            anime({
+              targets: '.contact-info h3',
+              opacity: [0, 1],
+              translateX: [-20, 0],
+              duration: 600,
+              delay: 600,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '.contact-link-primary, .contact-link',
+              opacity: [0, 1],
+              translateX: [-30, 0],
+              scale: [0.95, 1],
+              delay: anime.stagger(100, { start: 800 }),
+              duration: 600,
+              easing: 'easeOutElastic(1, .8)'
+            })
+          }
+
+          // Footer
+          if (target.classList.contains('portfolio-footer')) {
+            anime({
+              targets: '.portfolio-footer span',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+              easing: 'easeOutExpo'
+            })
+          }
+        }
+      })
+    }, observerOptions)
+
+    // Observe all sections
+    const sections = [
+      aboutRef.current,
+      educationRef.current,
+      presentationRef.current,
+      skillsRef.current,
+      experienceRef.current,
+      projectsRef.current,
+      contactRef.current,
+      footerRef.current
+    ]
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section)
+    })
+
+    // Button hover animations
+    const buttonHandlers = []
+    const buttons = document.querySelectorAll('.btn, .contact-link-primary, .contact-link')
+    buttons.forEach((button) => {
+      const handleEnter = () => {
+        anime({
+          targets: button,
+          scale: 1.05,
+          duration: 200,
+          easing: 'easeOutQuad'
+        })
+      }
+      const handleLeave = () => {
+        anime({
+          targets: button,
+          scale: 1,
+          duration: 200,
+          easing: 'easeOutQuad'
+        })
+      }
+      button.addEventListener('mouseenter', handleEnter)
+      button.addEventListener('mouseleave', handleLeave)
+      buttonHandlers.push({ element: button, enter: handleEnter, leave: handleLeave })
+    })
+
+    // Nav link hover animations
+    const navHandlers = []
+    const navLinks = document.querySelectorAll('.nav a')
+    navLinks.forEach((link) => {
+      const handleEnter = () => {
+        anime({
+          targets: link,
+          translateY: -2,
+          duration: 200,
+          easing: 'easeOutQuad'
+        })
+      }
+      const handleLeave = () => {
+        anime({
+          targets: link,
+          translateY: 0,
+          duration: 200,
+          easing: 'easeOutQuad'
+        })
+      }
+      link.addEventListener('mouseenter', handleEnter)
+      link.addEventListener('mouseleave', handleLeave)
+      navHandlers.push({ element: link, enter: handleEnter, leave: handleLeave })
+    })
+
+    // Card hover animations
+    const cardHandlers = []
+    const cards = document.querySelectorAll('.info-card, .project-card')
+    cards.forEach((card) => {
+      const handleEnter = () => {
+        anime({
+          targets: card,
+          translateY: -5,
+          scale: 1.02,
+          duration: 300,
+          easing: 'easeOutQuad'
+        })
+      }
+      const handleLeave = () => {
+        anime({
+          targets: card,
+          translateY: 0,
+          scale: 1,
+          duration: 300,
+          easing: 'easeOutQuad'
+        })
+      }
+      card.addEventListener('mouseenter', handleEnter)
+      card.addEventListener('mouseleave', handleLeave)
+      cardHandlers.push({ element: card, enter: handleEnter, leave: handleLeave })
+    })
+
+    return () => {
+      observer.disconnect()
+      // Clean up button event listeners
+      buttonHandlers.forEach(({ element, enter, leave }) => {
+        element.removeEventListener('mouseenter', enter)
+        element.removeEventListener('mouseleave', leave)
+      })
+      // Clean up nav event listeners
+      navHandlers.forEach(({ element, enter, leave }) => {
+        element.removeEventListener('mouseenter', enter)
+        element.removeEventListener('mouseleave', leave)
+      })
+      // Clean up card event listeners
+      cardHandlers.forEach(({ element, enter, leave }) => {
+        element.removeEventListener('mouseenter', enter)
+        element.removeEventListener('mouseleave', leave)
+      })
+    }
+  }, [])
+
   return (
     <div className="portfolio">
-      <header className="portfolio-header">
+      <header className="portfolio-header" ref={headerRef}>
         <div className="logo">Satyabrata</div>
         <nav className="nav">
           <a href="#home">Home</a>
@@ -23,11 +514,11 @@ function App() {
 
       <main>
         {/* Hero Section */}
-        <section id="home" className="hero">
+        <section id="home" className="hero" ref={heroRef}>
           <div className="hero-text">
             <p className="hero-eyebrow">Hello<span className="accent-dot">.</span></p>
             <p className="hero-subtitle">I&apos;m Satyabrata</p>
-            <h1 className="hero-title">Software Developer</h1>
+            <h1 className="hero-title-inline">Software Developer</h1>
             <p className="hero-description">
               I build reliable, high‑impact software systems — from intelligent AI backends
               to polished iOS experiences and performant data pipelines.
@@ -49,13 +540,13 @@ function App() {
               </a>
             </div>
             <div className="hero-tech-strip">
-              <span>HTML5</span>
-              <span>CSS</span>
-              <span>Javascript</span>
-              <span>Node.js</span>
-              <span>React</span>
-              <span>Git</span>
-              <span>Github</span>
+              <span>Python</span>
+              <span>Swift</span>
+              <span>PyTorch</span>
+              <span>FastAPI</span>
+              <span>SwiftUI</span>
+              <span>Docker</span>
+              <span>NLP</span>
             </div>
           </div>
 
@@ -70,7 +561,7 @@ function App() {
         </section>
 
         {/* About / Services Section */}
-        <section id="about" className="about">
+        <section id="about" className="about" ref={aboutRef}>
           <div className="about-grid">
             <div className="about-services">
               <div className="service">
@@ -129,7 +620,7 @@ function App() {
         </section>
 
         {/* Education Section */}
-        <section id="education" className="section">
+        <section id="education" className="section" ref={educationRef}>
           <div className="section-header">
             <h2>Education</h2>
             <p className="section-subtitle">
@@ -141,7 +632,7 @@ function App() {
             <article className="info-card">
               <div className="info-card-top">
                 <h3>University of Florida</h3>
-                <span className="pill">Aug 2025 – May 2027 (Expected)</span>
+                <span className="pill">Aug 2025 – May 2027 </span>
               </div>
               <p className="muted">M.S. in Artificial Intelligence Systems · Gainesville, FL</p>
               <ul className="bullets">
@@ -164,7 +655,7 @@ function App() {
         </section>
 
         {/* Academic Presentation Section */}
-        <section id="presentation" className="section">
+        <section id="presentation" className="section" ref={presentationRef}>
           <div className="section-header">
             <h2>Academic presentation</h2>
             <p className="section-subtitle">
@@ -189,7 +680,7 @@ function App() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="section">
+        <section id="skills" className="section" ref={skillsRef}>
           <div className="section-header">
             <h2>Skills</h2>
             <p className="section-subtitle">A quick snapshot based on my resume.</p>
@@ -264,7 +755,7 @@ function App() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="section">
+        <section id="experience" className="section" ref={experienceRef}>
           <div className="section-header">
             <h2>Work experience</h2>
             <p className="section-subtitle">
@@ -332,7 +823,7 @@ function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="projects">
+        <section id="projects" className="projects" ref={projectsRef}>
           <h2>Projects</h2>
           <div className="projects-grid">
             <article className="project-card">
@@ -381,26 +872,54 @@ function App() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="contact">
-          <h2>Let&apos;s build something</h2>
-          <p>
-            I&apos;m open to software engineering roles, AI/ML research collaborations, and NLP‑focused
-            projects. If you&apos;re working on something interesting in iOS, AI systems, or language
-            technologies, I&apos;d love to chat.
-          </p>
-          <div className="contact-links">
-            <a href="mailto:satyabratadas996@gmail.com">satyabratadas996@gmail.com</a>
-            <a href="https://www.linkedin.com/in/satyabrata-lm10/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
+        <section id="contact" className="contact" ref={contactRef}>
+          <div className="contact-container">
+            <div className="contact-header-wrapper">
+              <h2>Let&apos;s build something</h2>
+              <p className="contact-subtitle">
+                I&apos;m open to software engineering roles, AI/ML research collaborations, and NLP‑focused
+                projects. If you&apos;re working on something interesting in iOS, AI systems, or language
+                technologies, I&apos;d love to chat.
+              </p>
+            </div>
+            <div className="contact-highlight">
+              <div className="contact-info">
+                <h3>Get in Touch</h3>
+                <p className="contact-cta">Ready to collaborate? Reach out via:</p>
+                <div className="contact-links">
+                  <a href="mailto:satyabratadas996@gmail.com" className="contact-link-primary">
+                    <span className="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    </span>
+                    satyabratadas996@gmail.com
+                  </a>
+                  <a href="https://www.linkedin.com/in/satyabrata-lm10/" target="_blank" rel="noreferrer" className="contact-link">
+                    <span className="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </span>
+                    LinkedIn
+                  </a>
+                  <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="contact-link">
+                    <span className="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                      </svg>
+                    </span>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="portfolio-footer">
+      <footer className="portfolio-footer" ref={footerRef}>
         <span>© {new Date().getFullYear()} Satyabrata Das</span>
       </footer>
     </div>

@@ -3,12 +3,94 @@
 .portfolio {
   min-height: 100vh;
   color: #f9fafb;
-  background: radial-gradient(circle at top left, #1f2937 0, #020617 50%, #000 100%);
-  padding: 24px clamp(16px, 4vw, 48px);
-  max-width: 1200px;
+  background: #020617;
+  padding: 0;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Initial states for animated elements */
+.logo,
+.nav a,
+.hero-eyebrow,
+.hero-subtitle,
+.hero-title-inline,
+.hero-description,
+.btn,
+.hero-tech-strip span,
+.hero-portrait-ring,
+.hero-portrait,
+.service,
+.about-content h2,
+.about-content p,
+.stat,
+.section-header,
+.info-card,
+.chip,
+.timeline-marker,
+.timeline-card,
+.timeline-card li,
+.project-card,
+.project-tags li,
+.contact-header-wrapper h2,
+.contact-subtitle,
+.contact-highlight,
+.contact-info h3,
+.contact-link-primary,
+.contact-link,
+.portfolio-footer span {
+  opacity: 0;
+}
+
+.portfolio::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(circle at top left, #1f2937 0, #020617 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.portfolio::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(circle at top right, #111827 0, #020617 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.portfolio-header,
+main,
+.portfolio-footer {
+  position: relative;
+  z-index: 1;
+  padding-left: clamp(16px, 4vw, 48px);
+  padding-right: clamp(16px, 4vw, 48px);
+}
+
+.portfolio-header {
+  padding-top: 24px;
+  padding-bottom: 0;
+}
+
+main {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.portfolio-footer {
+  padding-top: 16px;
+  padding-bottom: 24px;
 }
 
 .portfolio-header {
@@ -82,12 +164,13 @@
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
 }
 
 .hero-eyebrow {
   font-size: 1.1rem;
   color: #e5e7eb;
+  margin-bottom: 0;
 }
 
 .accent-dot {
@@ -98,6 +181,17 @@
 .hero-subtitle {
   font-size: 1.3rem;
   color: #9ca3af;
+  margin-bottom: 0;
+  margin-top: 2px;
+}
+
+.hero-title-inline {
+  font-size: clamp(2.4rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #f9fafb;
+  display: block;
+  margin: 0;
+  margin-top: 4px;
 }
 
 .hero-title {
@@ -201,6 +295,17 @@
 
 .about {
   padding: 40px 0 24px;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(251, 113, 133, 0.3), transparent);
 }
 
 .about-grid {
@@ -286,6 +391,27 @@
 
 .section {
   padding: 32px 0 24px;
+  position: relative;
+}
+
+.section:nth-child(even)::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(251, 113, 133, 0.2), transparent);
+}
+
+.section:nth-child(odd)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(251, 113, 133, 0.2), transparent);
 }
 
 .section-header {
@@ -490,30 +616,114 @@
 /* Contact */
 
 .contact {
-  padding: 32px 0 16px;
+  padding: 40px 0 24px;
+  position: relative;
 }
 
-.contact p {
+.contact-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.contact-header-wrapper h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.contact-subtitle {
   font-size: 0.9rem;
   color: #9ca3af;
   max-width: 32rem;
+  margin: 0;
+}
+
+.contact-highlight {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 2px solid rgba(251, 113, 133, 0.4);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(251, 113, 133, 0.2), 0 0 0 1px rgba(251, 113, 133, 0.1);
+  position: relative;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 20px 60px rgba(251, 113, 133, 0.2), 0 0 0 1px rgba(251, 113, 133, 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 60px rgba(251, 113, 133, 0.35), 0 0 0 1px rgba(251, 113, 133, 0.2);
+  }
+}
+
+.contact-info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 8px 0;
+  color: #fb7185;
+}
+
+.contact-cta {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin: 0 0 20px 0;
 }
 
 .contact-links {
-  margin-top: 14px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 0.85rem;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.contact-links a {
+.contact-link-primary,
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  border-radius: 12px;
   color: #e5e7eb;
   text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-out;
 }
 
-.contact-links a:hover {
+.contact-link-primary {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.2) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border-color: rgba(251, 113, 133, 0.5);
+  font-weight: 500;
+}
+
+.contact-link-primary:hover {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.3) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border-color: #fb7185;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(251, 113, 133, 0.3);
+}
+
+.contact-link:hover {
+  border-color: #fb7185;
   color: #fb7185;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(251, 113, 133, 0.2);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 100%;
+  height: 100%;
+  color: inherit;
 }
 
 /* Footer */
@@ -543,8 +753,16 @@
 }
 
 @media (max-width: 768px) {
-  .portfolio {
-    padding-inline: 16px;
+  .portfolio-header,
+  main,
+  .portfolio-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .contact-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 
   .nav {
