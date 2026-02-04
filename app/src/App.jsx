@@ -355,6 +355,15 @@ function App() {
             })
 
             anime({
+              targets: '.contact-location',
+              opacity: [0, 1],
+              translateX: [-20, 0],
+              duration: 600,
+              delay: 680,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
               targets: '.contact-link-primary, .contact-link',
               opacity: [0, 1],
               translateX: [-30, 0],
@@ -673,8 +682,7 @@ function App() {
               model design, and evaluation.
             </p>
             <ul className="bullets">
-              <li>Explained methodology, metrics, and experimental results in a formal poster session.</li>
-              <li>Discussed findings and trade‑offs with faculty, researchers, and fellow students.</li>
+              <li>Delivered a formal poster presentation of an AI/ML project, articulating the problem formulation, model design, evaluation metrics, and results to faculty and peers.</li>
             </ul>
           </article>
         </section>
@@ -825,50 +833,206 @@ function App() {
         {/* Projects Section */}
         <section id="projects" className="projects" ref={projectsRef}>
           <h2>Projects</h2>
-          <div className="projects-grid">
-            <article className="project-card">
-              <h3>SummarIQ</h3>
-              <p className="project-meta">NLP · LLMs · LaTeX Parsing</p>
-              <p>
-                Math‑aware research paper summarizer that parses LaTeX equations, ranks importance,
-                and generates section‑wise summaries with transformer models and a FastAPI backend.
-              </p>
-              <ul className="project-tags">
-                <li>Python</li>
-                <li>FastAPI</li>
-                <li>Docker</li>
-                <li>Transformers</li>
-              </ul>
-            </article>
+            <div className="projects-grid">
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
+                    <img src="/Project_images/arc_facilities.png" alt="ARC Facilities (ARC Document Solutions)" />
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🏢</span>
+                      <span>iOS · Realtime</span>
+                    </div>
+                  </div>
+                </div>
 
-            <article className="project-card">
-              <h3>WiProtect</h3>
-              <p className="project-meta">Swift · iOS Security</p>
-              <p>
-                Real‑time iOS application that evaluates Wi‑Fi security for WPA/WPA2/WPA3 networks,
-                flags insecure configurations, and surfaces clear remediation guidance.
-              </p>
-              <ul className="project-tags">
-                <li>Swift</li>
-                <li>SwiftUI</li>
-                <li>Core Data</li>
-              </ul>
-            </article>
+                  <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>ARC Facilities</h3>
+                    <a
+                      href="https://apps.apple.com/in/app/arc-facilities-premier/id6739283887"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="More about ARC Facilities"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                  </div>
 
-            <article className="project-card">
-              <h3>Clippy 2.0</h3>
-              <p className="project-meta">Python · Voice Assistant</p>
-              <p>
-                Modular desktop voice assistant with real‑time speech recognition, text‑to‑speech,
-                and an extendable command framework for automating everyday tasks.
-              </p>
-              <ul className="project-tags">
-                <li>Python</li>
-                <li>SpeechRecognition</li>
-                <li>pyttsx3</li>
-              </ul>
-            </article>
-          </div>
+                  <p className="project-meta">
+                  iOS · WebSockets · QR · APIs
+                  </p>
+
+                  <p>
+                    Enterprise iOS app enabling real-time collaboration through WebSocket-based changesets,
+                    QR code workflows, and API integrations to streamline facility document access.
+                  </p>
+
+                  <ul className="project-tags">
+                    <li>Swift</li>
+                    <li>UIKit / SwiftUI</li>
+                    <li>WebSockets</li>
+                    <li>REST APIs</li>
+                    <li>QR Code</li>
+                    <li>Core Data</li>
+                    <li>Multithreading</li>
+                    <li>Secure App Development</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
+                    <img src="/Project_images/arc_print.png" alt="ARC Print (ARC Document Solutions)" />
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🛒</span>
+                      <span>Payments · iOS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>ARC Print</h3>
+                    <a
+                      href="https://apps.apple.com/in/app/arc-print/id1452827125"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="More about ARC Print"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                  </div>
+
+                  <p className="project-meta">
+                    E-commerce · Payments · reCAPTCHA · SwiftUI
+                  </p>
+
+                  <p>
+                    Production iOS e-commerce experience with payment gateway integrations and bot protection,
+                    plus MPS UI improvements and SwiftUI filters to boost checkout reliability and conversions.
+                  </p>
+
+                  <ul className="project-tags">
+                    <li>Swift</li>
+                    <li>SwiftUI</li>
+                    <li>Payment Gateways</li>
+                    <li>Razorpay</li>
+                    <li>Paytm</li>
+                    <li>Cashfree</li>
+                    <li>Braintree</li>
+                    <li>reCAPTCHA</li>
+                  </ul>
+                </div>
+              </article>
+
+
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
+                    <img src="/Project_images/SummarIQ.png" alt="SummarIQ"/>
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">Σ</span>
+                      <span>NLP · Summarization</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>SummarIQ</h3>
+                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="project-info-icon" aria-label="More about SummarIQ">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </a>
+                  </div>
+                  <p className="project-meta">NLP · LLMs · LaTeX Parsing</p>
+                  <p>
+                    Math‑aware research paper summarizer that parses LaTeX equations, ranks importance,
+                    and generates section‑wise summaries with transformer models and a FastAPI backend.
+                  </p>
+                  <ul className="project-tags">
+                    <li>NLP</li>
+                    <li>Transformers</li>
+                    <li>T5/BART</li>
+                    <li>Scientific Document Processing</li>
+                    <li>FastAPI</li>
+                    <li>Docker</li>
+                    <li>Microservices</li>
+                    <li>Model Monitoring</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
+                    <img src="/Project_images/Wi_protect.png" alt="WiProtect"/>
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">📶</span>
+                      <span>iOS · Security</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>WiProtect</h3>
+                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="project-info-icon" aria-label="More about WiProtect">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </a>
+                  </div>
+                  <p className="project-meta">Swift · iOS Security</p>
+                  <p>
+                    Real‑time iOS application that evaluates Wi‑Fi security for WPA/WPA2/WPA3 networks,
+                    flags insecure configurations, and surfaces clear remediation guidance.
+                  </p>
+                  <ul className="project-tags">
+                    <li>Swift</li>
+                    <li>UiKit</li>
+                    <li>Mobile Security</li>
+                    <li>Network Protocols</li>
+                    <li>Wi-Fi Security</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
+                    <img src="/Project_images/Clippy_2.0.png" alt="Clippy 2.0"/>
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🎙️</span>
+                      <span>Voice · Assistant</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>Clippy 2.0</h3>
+                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="project-info-icon" aria-label="More about Clippy 2.0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </a>
+                  </div>
+                  <p className="project-meta">Python · Voice Assistant</p>
+                  <p>
+                    Modular desktop voice assistant with real‑time speech recognition, text‑to‑speech,
+                    and an extendable command framework for automating everyday tasks.
+                  </p>
+                  <ul className="project-tags">
+                    <li>Python</li>
+                    <li>SpeechRecognition</li>
+                    <li>pyttsx3</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
         </section>
 
         {/* Contact Section */}
@@ -885,6 +1049,12 @@ function App() {
             <div className="contact-highlight">
               <div className="contact-info">
                 <h3>Get in Touch</h3>
+                <p className="contact-location">
+                  <span className="contact-location-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </span>
+                  Gainesville, FL, USA
+                </p>
                 <p className="contact-cta">Ready to collaborate? Reach out via:</p>
                 <div className="contact-links">
                   <a href="mailto:satyabratadas996@gmail.com" className="contact-link-primary">
