@@ -834,10 +834,10 @@ function App() {
         <section id="projects" className="projects" ref={projectsRef}>
           <h2>Projects</h2>
             <div className="projects-grid">
-              <article className="project-card">
+              {/* <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
-                    <img src="/Project_images/arc_facilities.png" alt="ARC Facilities (ARC Document Solutions)" />
+                    <img src="/Project_images/arc_facilities.png" alt="ARC Facilities" />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">🏢</span>
                       <span>iOS · Realtime</span>
@@ -882,12 +882,97 @@ function App() {
                     <li>Secure App Development</li>
                   </ul>
                 </div>
+              </article> */}
+              <article className="project-card arc-affiliated">
+                <div className="project-card-image">
+                  <div className="project-card-frame project-card-frame--logo">
+                    {/* <img
+                      src="/Project_images/arc_facilities.png"
+                      alt="ARC Facilities"
+                      className="project-card-img"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.add("visible");
+                      }}
+                    /> */}
+                     {/* check this one  */}
+                    {/* <img
+                      src="/Project_images/arc_facilities.png"
+                      alt="ARC Facilities"
+                      className="project-card-img project-card-img--logo"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.add("visible");
+                      }}
+                    /> */}
+
+                    <img
+                      src="/Project_images/arc_facilities.png"
+                      alt="ARC Facilities"
+                      className="project-card-img project-card-img--logo"
+                    />
+
+                    {/* ✅ Hover Pill (shows only on hover) */}
+                    <span className="affiliation-pill">Affiliated to ARC Document Solutions</span>
+
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🏢</span>
+                      <span>iOS · Realtime</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>ARC Facilities</h3>
+                    <a
+                      href="https://apps.apple.com/in/app/arc-facilities-premier/id6739283887"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="View ARC Facilities on the App Store"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                  </div>
+
+                  <p className="project-meta">ARC Document Solutions · iOS · WebSockets · QR · APIs</p>
+
+                  <p>
+                    Enterprise iOS app enabling real-time collaboration through WebSocket-based changesets,
+                    QR code workflows, and API integrations to streamline facility document access.
+                  </p>
+
+                  <ul className="project-tags">
+                    <li>Swift</li>
+                    <li>UIKit / SwiftUI</li>
+                    <li>WebSockets</li>
+                    <li>REST APIs</li>
+                    <li>QR Code</li>
+                    <li>Core Data</li>
+                    <li>Multithreading</li>
+                    <li>Secure App Development</li>
+                  </ul>
+                </div>
               </article>
 
-              <article className="project-card">
+              {/* <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
-                    <img src="/Project_images/arc_print.png" alt="ARC Print (ARC Document Solutions)" />
+                    <img src="/Project_images/arc_print.png" alt="ARC Print" />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">🛒</span>
                       <span>Payments · iOS</span>
@@ -932,7 +1017,79 @@ function App() {
                     <li>reCAPTCHA</li>
                   </ul>
                 </div>
+              </article> */}
+
+              <article className="project-card arc-affiliated">
+                <div className="project-card-image">
+                  <div className="project-card-frame project-card-frame--logo">
+                    <img
+                      src="/Project_images/arc_print.png"
+                      alt="ARC Print"
+                      className="project-card-img project-card-img--logo"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.add("visible");
+                      }}
+                    />
+
+                    {/* Hover pill */}
+                    <span className="affiliation-pill">Affiliated to ARC Document Solutions</span>
+
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🛒</span>
+                      <span>Payments · iOS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>ARC Print</h3>
+                    <a
+                      href="https://apps.apple.com/in/app/arc-print/id1452827125"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="View ARC Print on the App Store"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                  </div>
+
+                  <p className="project-meta">
+                    ARC Document Solutions · iOS · Payments · reCAPTCHA · SwiftUI
+                  </p>
+
+                  <p>
+                    Production iOS e-commerce experience with payment gateway integrations and bot protection,
+                    plus MPS UI improvements and SwiftUI filters to boost checkout reliability and conversions.
+                  </p>
+
+                  <ul className="project-tags">
+                    <li>Swift</li>
+                    <li>SwiftUI</li>
+                    <li>Payment Gateways</li>
+                    <li>Razorpay</li>
+                    <li>Paytm</li>
+                    <li>Cashfree</li>
+                    <li>Braintree</li>
+                    <li>reCAPTCHA</li>
+                  </ul>
+                </div>
               </article>
+
 
 
 

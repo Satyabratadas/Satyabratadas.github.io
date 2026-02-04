@@ -583,6 +583,75 @@ main {
   flex-direction: column;
 }
 
+/* ARC-affiliated project cards */
+.project-card.arc-affiliated {
+  position: relative;
+}
+
+/* Ensure frame is positioning context */
+.project-card-frame {
+  position: relative;
+}
+
+/* Affiliation pill (hidden by default) */
+/* .project-card.arc-affiliated .affiliation-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 2px solid #39ff14;
+  background: rgba(8, 10, 14, 0.92);
+
+  color: #eaeaea;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  transition: opacity 180ms ease, transform 180ms ease;
+} */
+
+.project-card.arc-affiliated .affiliation-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  /* ✅ theme pink/red */
+  border: 1.5px solid rgba(251, 113, 133, 0.65);
+  background: rgba(15, 23, 42, 0.92);
+
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.2px;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(251, 113, 133, 0.12);
+
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+/* Show pill on hover */
+.project-card.arc-affiliated:hover .affiliation-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Project card image area - device/screen frame */
 .project-card-image {
   width: 100%;
@@ -614,6 +683,7 @@ main {
   right: 0;
   height: 24px;
   background: rgba(31, 41, 55, 0.9);
+  backdrop-filter: blur(6px);
   border-radius: 8px 8px 0 0;
 }
 
@@ -625,6 +695,7 @@ main {
   font-size: 8px;
   letter-spacing: 2px;
   color: #6b7280;
+  display: none;
 }
 
 .project-card-img {
@@ -634,6 +705,16 @@ main {
   display: block;
   position: absolute;
   inset: 24px 0 0 0;
+}
+
+.project-card-frame--logo .project-card-img {
+  inset: 0;
+}
+
+.project-card-img--logo {
+  object-fit: contain;
+  padding: 28px 20px;
+  background: rgba(2, 6, 23, 0.35);
 }
 
 .project-card-placeholder {
@@ -946,6 +1027,11 @@ main {
 
   .pill {
     white-space: normal;
+  }
+
+  /* Hide affiliation pill on mobile */
+  .project-card.arc-affiliated .affiliation-pill {
+    display: none;
   }
 }
 
