@@ -10,6 +10,7 @@ function App() {
   const presentationRef = useRef(null)
   const skillsRef = useRef(null)
   const experienceRef = useRef(null)
+  const hackathonsRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
   const footerRef = useRef(null)
@@ -286,6 +287,27 @@ function App() {
             })
           }
 
+          // Hackathons section
+          if (target.id === 'hackathons') {
+            anime({
+              targets: '#hackathons .section-header',
+              opacity: [0, 1],
+              translateY: [-30, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '#hackathons .info-card',
+              opacity: [0, 1],
+              translateY: [50, 0],
+              scale: [0.9, 1],
+              delay: anime.stagger(150, { start: 300 }),
+              duration: 800,
+              easing: 'easeOutElastic(1, .6)'
+            })
+          }
+
           // Projects section
           if (target.classList.contains('projects')) {
             anime({
@@ -395,6 +417,7 @@ function App() {
       presentationRef.current,
       skillsRef.current,
       experienceRef.current,
+      hackathonsRef.current,
       projectsRef.current,
       contactRef.current,
       footerRef.current
@@ -520,6 +543,7 @@ function App() {
           <a href="#education">Education</a>
           <a href="#skills">Skills</a>
           <a href="#experience">Experience</a>
+          <a href="#hackathons">Hackathons</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -836,6 +860,98 @@ function App() {
                   </li>
                 </ul>
               </div>
+            </article>
+          </div>
+        </section>
+
+        {/* Hackathons Section */}
+        <section id="hackathons" className="section" ref={hackathonsRef}>
+          <div className="section-header">
+            <h2>Hackathons</h2>
+            <p className="section-subtitle">
+              Recent ML/CV and data-focused hackathons where I shipped under tight deadlines.
+            </p>
+          </div>
+
+          <div className="cards-grid">
+            <article className="info-card">
+              <div className="info-card-top">
+                <div className="project-card-title-row">
+                  <h3>Hacklytics 2026 — JuggleIQ</h3>
+                  <a
+                    href="https://devpost.com/software/juggleiq"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-info-icon"
+                    aria-label="View JuggleIQ on Devpost"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                  </a>
+                </div>
+                <span className="pill">48-hour ML/CV hackathon · Participant</span>
+              </div>
+              <p className="muted">Data Science @ Georgia Tech · Atlanta, GA</p>
+              <ul className="bullets">
+                <li>
+                  Built JuggleIQ, a computer vision tool that analyzes soccer juggling technique using YOLO,
+                  MediaPipe, and Kalman filtering for real-time ball tracking and feedback.
+                </li>
+                <li>
+                  Led backend ML/CV pipeline development and collaborated in a 4-person team to deliver a working
+                  prototype within 48 hours.
+                </li>
+              </ul>
+            </article>
+
+            <article className="info-card">
+              <div className="info-card-top">
+                <div className="project-card-title-row">
+                  <h3>NASA GeoEMERGE Data Hackathon</h3>
+                  <a
+                    href="https://devpost.com/software/placeholder-gzdnxm"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-info-icon"
+                    aria-label="View NASA GeoEMERGE project on Devpost"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                  </a>
+                </div>
+                <span className="pill">Intermediate Track – Data Analysis Recognition · Winner</span>
+              </div>
+              <p className="muted">NASA GeoEMERGE · Remote</p>
+              <ul className="bullets">
+                <li>
+                  Analyzed bias, missing data, and contributor behavior in mosquito habitat observations from the
+                  GLOBE Observer platform to understand impacts on downstream ML.
+                </li>
+                <li>
+                  Highlighted how spatial imbalance and incomplete environmental context affect public-health
+                  insights, and proposed improvements to data collection workflows.
+                </li>
+              </ul>
             </article>
           </div>
         </section>
