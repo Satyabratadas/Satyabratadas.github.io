@@ -527,10 +527,10 @@ function App() {
           <div className="hero-text">
             <p className="hero-eyebrow">Hello<span className="accent-dot">.</span></p>
             <p className="hero-subtitle">I&apos;m Satyabrata</p>
-            <h1 className="hero-title-inline">Software Developer</h1>
+            <h1 className="hero-title-inline">Software Engineer</h1>
             <p className="hero-description">
-              I build reliable, high‑impact software systems — from intelligent AI backends
-              to polished iOS experiences and performant data pipelines.
+              I design and build production-grade Machine Learning and Computer Vision systems —
+              from real-time inference pipelines to scalable AI backends and reliable intelligent applications.
             </p>
             <div className="hero-actions">
               <a
@@ -550,12 +550,12 @@ function App() {
             </div>
             <div className="hero-tech-strip">
               <span>Python</span>
-              <span>Swift</span>
               <span>PyTorch</span>
+              <span>YOLO</span>
               <span>FastAPI</span>
-              <span>SwiftUI</span>
+              <span>Swift</span>
               <span>Docker</span>
-              <span>NLP</span>
+              <span>CV / MLE</span>
             </div>
           </div>
 
@@ -574,24 +574,24 @@ function App() {
           <div className="about-grid">
             <div className="about-services">
               <div className="service">
-                <div className="service-icon">🧠</div>
+                <div className="service-icon">👁️</div>
                 <div className="service-content">
-                  <h3>AI / ML Projects</h3>
-                  <p>Transformers, NLP, and robust AI systems — from research ideas to working demos.</p>
+                  <h3>Computer Vision</h3>
+                  <p>Real-time inference pipelines with YOLO and MediaPipe for object detection and spatial tracking.</p>
                 </div>
               </div>
-                <div className="service">
-                <div className="service-icon">📱</div>
+              <div className="service">
+                <div className="service-icon">🧠</div>
                 <div className="service-content">
-                  <h3>iOS Development</h3>
-                  <p>SwiftUI apps with strong UX, performance, and secure data handling.</p>
+                  <h3>ML Engineering</h3>
+                  <p>End-to-end pipelines from PyTorch training to high-throughput, low-latency deployment.</p>
                 </div>
               </div>
               <div className="service">
                 <div className="service-icon">⚙️</div>
                 <div className="service-content">
-                  <h3>Backend & Systems</h3>
-                  <p>FastAPI microservices, Docker, and observability (Prometheus/Grafana).</p>
+                  <h3>System Reliability</h3>
+                  <p>Production AI systems built for performance and reliability under real-world load.</p>
                 </div>
               </div>
             </div>
@@ -599,15 +599,16 @@ function App() {
             <div className="about-content">
               <h2>About me</h2>
               <p>
-                I&apos;m an iOS‑focused Software Engineer (Swift/SwiftUI) currently pursuing an M.S. in
-                Artificial Intelligence Systems at the University of Florida. I enjoy building
-                secure, performant mobile experiences and working on AI/ML projects that turn
-                research ideas into usable tools.
+                I&apos;m a Software Engineer and M.S. in AI Systems student at the University of Florida,
+                specializing in high-performance, production-grade Machine Learning and Computer Vision systems.
+                With over 2.5 years of professional experience, I focus on the full lifecycle of intelligent
+                systems — taking models from research and notebooks into robust, scalable, real-time environments.
               </p>
               <p>
-                Previously, I worked on real‑time collaboration features, Wi‑Fi security analysis,
-                and payment/checkout reliability in production iOS apps. In grad school, my focus is
-                on AI systems, robustness, and applied deep learning.
+                My work centers on real-time CV pipelines (YOLO, MediaPipe), ML engineering with PyTorch,
+                and deployment that meets strict latency and throughput requirements. I bring a strong
+                foundation in optimization and neural network theory to the engineering process, so design
+                decisions are informed by both theory and production constraints.
               </p>
 
               <div className="about-stats">
