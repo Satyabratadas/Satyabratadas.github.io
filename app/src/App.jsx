@@ -503,6 +503,15 @@ function App() {
 
   return (
     <div className="portfolio">
+      {/* Techy animated background */}
+      <div className="portfolio-bg" aria-hidden="true">
+        <div className="bg-grid" />
+        <div className="bg-glow bg-glow-1" />
+        <div className="bg-glow bg-glow-2" />
+        <div className="bg-glow bg-glow-3" />
+        <div className="bg-dots" />
+        <div className="bg-scanline" />
+      </div>
       <header className="portfolio-header" ref={headerRef}>
         <div className="logo">Satyabrata</div>
         <nav className="nav">
