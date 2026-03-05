@@ -1239,6 +1239,23 @@ function App() {
                     </span>
                     GitHub
                   </a>
+                  <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="contact-link">
+                    <span className="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5.59 2.23a.81.81 0 0 1 .4-.1h2.1v14.33h-2.5V9.35H5.59a3.39 3.39 0 0 1 0-6.77zm2.5 4.02h2.27a2.15 2.15 0 1 0 0-4.3H8.09v4.3zm10.32-4.12l-2.47 4.95 2.47 4.94h-2.97l-1.5-3.09-1.48 3.09h-2.97l2.47-4.94-2.47-4.95h2.97l1.48 3.08 1.5-3.08h2.97z"/>
+                      </svg>
+                    </span>
+                    Kaggle
+                  </a>
+                  <a href="https://devpost.com/satyabratadas996?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noreferrer" className="contact-link">
+                    <span className="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="16 18 22 12 16 6"/>
+                        <polyline points="8 6 2 12 8 18"/>
+                      </svg>
+                    </span>
+                    Devpost
+                  </a>
                 </div>
               </div>
             </div>
