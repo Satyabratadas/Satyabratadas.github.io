@@ -1231,7 +1231,7 @@ function App() {
                 </div>
                 <div className="project-card-body">
                   <div className="project-card-title-row">
-                    <h3>Math-Aware Research Paper Summarizer</h3>
+                    <h3>SummarIQ</h3>
                     <div className="project-info-with-tooltip">
                       <a
                         href="https://github.com/Satyabratadas/SummarIQ"
@@ -1256,7 +1256,7 @@ function App() {
                       <span className="project-tooltip">View project on GitHub</span>
                     </div>
                   </div>
-                  <p className="project-meta">NLP · LaTeX · FastAPI · Docker</p>
+                  <p className="project-meta">Math-Aware Research Paper Summarizer</p>
                   <p>
                     LaTeX-aware scientific paper summarization system using T5/BART to generate section-wise summaries and equation
                     explanations. FastAPI backend with Dockerized services achieving sub-1.4s response latency, with Prometheus/Grafana
@@ -1272,6 +1272,66 @@ function App() {
                     <li>Docker</li>
                     <li>Prometheus/Grafana</li>
                     <li>Model Monitoring</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame project-card-frame--logo">
+                    <img
+                      src="/Project_images/Ship_detection.png"
+                      alt="ShipSight AI"
+                      className="project-card-img project-card-img--logo"
+                    />
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🛰️</span>
+                      <span>ML · Satellite CV</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>ShipSight AI</h3>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/Satyabratadas/Ship_Detection_Using_Satellite_Images"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View ship detection project on GitHub"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View project on GitHub</span>
+                    </div>
+                  </div>
+                  <p className="project-meta">Ship Detection using Satellite Images</p>
+                  <p>
+                    Ship detection pipeline on satellite imagery using Logistic Regression, Random Forest, and Linear SVM, comparing
+                    performance with and without dimensionality reduction (PCA, Isomap, LLE). The best model (Random Forest + Isomap)
+                    is used for scene-level ship localization and visual analysis.
+                  </p>
+                  <ul className="project-tags">
+                    <li>Satellite Images</li>
+                    <li>Ship Detection</li>
+                    <li>Random Forest</li>
+                    <li>Logistic Regression</li>
+                    <li>Linear SVM</li>
+                    <li>PCA</li>
+                    <li>Isomap</li>
+                    <li>LLE</li>
                   </ul>
                 </div>
               </article>
