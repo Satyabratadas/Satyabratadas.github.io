@@ -1231,22 +1231,38 @@ function App() {
                 </div>
                 <div className="project-card-body">
                   <div className="project-card-title-row">
-                    <h3>SummarIQ</h3>
-                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="project-info-icon" aria-label="More about SummarIQ">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    </a>
+                    <h3>Math-Aware Research Paper Summarizer</h3>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/Satyabratadas/SummarIQ"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View project on GitHub"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View project on GitHub</span>
+                    </div>
                   </div>
-                  <p className="project-meta">Math-Aware Research Paper Summarizer</p>
-                  <div className="project-card-lines">
-                    <p>Developed a LaTeX-aware scientific paper summarization system using T5/BART transformers to generate 
-                      section-wise summaries and explain mathematical equations. Built a FastAPI backend with Dockerized services, 
-                      achieving sub-1.4s response latency.Integrated Prometheus and Grafana for real-time monitoring and performance 
-                      metrics. Designed a custom LaTeX extraction pipeline processing 200+ research papers with over 92% accuracy in 
-                      identifying equations, figures, and tables.
-                    </p>
-                    {/* <p>FastAPI + Docker, &lt;1.4s latency; Prometheus/Grafana instrumentation.</p>
-                    <p>LaTeX extraction over 200+ papers, &gt;92% accuracy on equations/figures/tables.</p> */}
-                  </div>
+                  <p className="project-meta">NLP · LaTeX · FastAPI · Docker</p>
+                  <p>
+                    LaTeX-aware scientific paper summarization system using T5/BART to generate section-wise summaries and equation
+                    explanations. FastAPI backend with Dockerized services achieving sub-1.4s response latency, with Prometheus/Grafana
+                    for monitoring. Custom LaTeX extraction pipeline over 200+ research papers with over 92% accuracy on equations,
+                    figures, and tables.
+                  </p>
                   <ul className="project-tags">
                     <li>NLP</li>
                     <li>Transformers</li>

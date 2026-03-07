@@ -887,6 +887,37 @@ main {
   background: rgba(6, 182, 212, 0.35);
 }
 
+/* Project info tooltip for Summarizer */
+.project-info-with-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.project-tooltip {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  padding: 8px 14px;
+  border-radius: 14px;
+  background: #020617;
+  border: 1px solid #06b6d4;
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  white-space: nowrap;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.project-info-with-tooltip:hover .project-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .project-card h3 {
   font-size: 1rem;
   margin-bottom: 4px;
@@ -902,7 +933,6 @@ main {
   font-size: 0.86rem;
   color: #9ca3af;
   margin-bottom: 10px;
-  flex: 1;
 }
 
 .project-card-body .project-card-bullets {
