@@ -905,6 +905,28 @@ main {
   flex: 1;
 }
 
+.project-card-body .project-card-bullets {
+  margin: 0 0 10px 0;
+  flex: 1;
+  font-size: 0.84rem;
+}
+
+.project-card-lines {
+  flex: 1;
+  margin-bottom: 10px;
+}
+
+.project-card-lines p {
+  font-size: 0.86rem;
+  color: #9ca3af;
+  margin: 0 0 6px 0;
+  line-height: 1.45;
+}
+
+.project-card-lines p:last-child {
+  margin-bottom: 0;
+}
+
 .project-tags {
   list-style: none;
   padding: 0;
