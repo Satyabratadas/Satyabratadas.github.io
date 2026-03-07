@@ -878,26 +878,29 @@ function App() {
               <div className="info-card-top">
                 <div className="project-card-title-row">
                   <h3>Hacklytics 2026 — JuggleIQ</h3>
-                  <a
-                    href="https://devpost.com/software/juggleiq"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-info-icon"
-                    aria-label="View JuggleIQ on Devpost"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
+                  <div className="project-info-with-tooltip">
+                    <a
+                      href="https://devpost.com/software/juggleiq"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="View JuggleIQ on Devpost"
                     >
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 16v-4M12 8h.01" />
-                    </svg>
-                  </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                    <span className="project-tooltip">View on Devpost</span>
+                  </div>
                 </div>
                 <span className="pill">48-hour ML/CV hackathon · Participant</span>
               </div>
@@ -918,26 +921,29 @@ function App() {
               <div className="info-card-top">
                 <div className="project-card-title-row">
                   <h3>NASA GeoEMERGE Data Hackathon</h3>
-                  <a
-                    href="https://devpost.com/software/placeholder-gzdnxm"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-info-icon"
-                    aria-label="View NASA GeoEMERGE project on Devpost"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
+                  <div className="project-info-with-tooltip">
+                    <a
+                      href="https://devpost.com/software/placeholder-gzdnxm"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-info-icon"
+                      aria-label="View NASA GeoEMERGE project on Devpost"
                     >
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 16v-4M12 8h.01" />
-                    </svg>
-                  </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </a>
+                    <span className="project-tooltip">View on Devpost</span>
+                  </div>
                 </div>
                 <span className="pill">Intermediate Track – Data Analysis Recognition · Winner</span>
               </div>
