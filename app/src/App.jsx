@@ -947,7 +947,7 @@ function App() {
                 </div>
                 <span className="pill">Intermediate Track – Data Analysis Recognition · Winner</span>
               </div>
-              <p className="muted">NASA GeoEMERGE · Remote</p>
+              <p className="muted">Marston Science Library @ University of Florida · Gainesville, FL</p>
               <ul className="bullets">
                 <li>
                   Analyzed bias, missing data, and contributor behavior in mosquito habitat observations from the
