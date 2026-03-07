@@ -1053,26 +1053,29 @@ function App() {
                 <div className="project-card-body">
                   <div className="project-card-title-row">
                     <h3>ARC Facilities</h3>
-                    <a
-                      href="https://apps.apple.com/in/app/arc-facilities-premier/id6739283887"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-info-icon"
-                      aria-label="View ARC Facilities on the App Store"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://apps.apple.com/in/app/arc-facilities-premier/id6739283887"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View ARC Facilities on the App Store"
                       >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                      </svg>
-                    </a>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View project on App Store</span>
+                    </div>
                   </div>
 
                   <p className="project-meta">ARC Document Solutions · iOS · WebSockets · QR · APIs</p>
@@ -1172,26 +1175,29 @@ function App() {
                 <div className="project-card-body">
                   <div className="project-card-title-row">
                     <h3>ARC Print</h3>
-                    <a
-                      href="https://apps.apple.com/in/app/arc-print/id1452827125"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-info-icon"
-                      aria-label="View ARC Print on the App Store"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://apps.apple.com/in/app/arc-print/id1452827125"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View ARC Print on the App Store"
                       >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                      </svg>
-                    </a>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View project on App Store</span>
+                    </div>
                   </div>
 
                   <p className="project-meta">
