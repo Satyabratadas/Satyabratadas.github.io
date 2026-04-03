@@ -1,2 +1,3 @@
 
 update trigger
+add trigger
