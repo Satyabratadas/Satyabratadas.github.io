@@ -1234,6 +1234,64 @@ function App() {
               <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
+                    <img src="/Project_images/intelligent-bistro.png" alt="Intelligent Bistro" />
+                    <div className="project-card-placeholder">
+                      <span className="project-placeholder-icon">🍽️</span>
+                      <span>React Native · Gemini AI</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="project-card-body">
+                  <div className="project-card-title-row">
+                    <h3>Intelligent Bistro</h3>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/Satyabratadas/intelligent-bistro"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Intelligent Bistro on GitHub"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View project on GitHub</span>
+                    </div>
+                  </div>
+                  <p className="project-meta">AI-Powered Restaurant Ordering · React Native (Expo) · Node.js</p>
+                  <p>
+                    Full-stack mobile restaurant app where users browse categorized menus, manage a shopping cart, and place orders
+                    through natural-language AI chat. Expo React Native frontend with Zustand state management; Node.js/Express backend
+                    uses Google Gemini to parse requests like &quot;Add two spicy chicken sandwiches and one lemonade&quot; into structured
+                    JSON cart actions (add, remove, clear) with rule-based fallback for reliability.
+                  </p>
+                  <ul className="project-tags">
+                    <li>React Native</li>
+                    <li>Expo</li>
+                    <li>TypeScript</li>
+                    <li>Zustand</li>
+                    <li>Node.js</li>
+                    <li>Express</li>
+                    <li>Google Gemini API</li>
+                    <li>Conversational Commerce</li>
+                    <li>REST APIs</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-card-image">
+                  <div className="project-card-frame">
                     <img src="/Project_images/SummarIQ.png" alt="SummarIQ"/>
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">Σ</span>
