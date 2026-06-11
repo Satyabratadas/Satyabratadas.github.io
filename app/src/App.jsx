@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import anime from 'animejs'
 import './App.css'
 
 function App() {
+  const [isNavOpen, setIsNavOpen] = useState(false)
   const heroRef = useRef(null)
   const headerRef = useRef(null)
   const aboutRef = useRef(null)
@@ -14,6 +15,12 @@ function App() {
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
   const footerRef = useRef(null)
+
+  const handleProjectImageError = (event) => {
+    const frame = event.currentTarget.closest('.project-card-frame')
+    event.currentTarget.style.display = 'none'
+    frame?.querySelector('.project-card-placeholder')?.classList.add('visible')
+  }
 
   useEffect(() => {
     // Check if anime is available
@@ -102,6 +109,24 @@ function App() {
       delay: anime.stagger(80, { start: 1400 }),
       duration: 500,
       easing: 'easeOutElastic(1, .5)'
+    })
+
+    const handlePointerMove = (event) => {
+      const x = `${(event.clientX / window.innerWidth) * 100}%`
+      const y = `${(event.clientY / window.innerHeight) * 100}%`
+      document.documentElement.style.setProperty('--pointer-x', x)
+      document.documentElement.style.setProperty('--pointer-y', y)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+
+    anime({
+      targets: '.hero-metric',
+      opacity: [0, 1],
+      translateY: [18, 0],
+      delay: anime.stagger(120, { start: 1250 }),
+      duration: 700,
+      easing: 'easeOutExpo'
     })
 
     // Hero portrait animation
@@ -506,6 +531,7 @@ function App() {
 
     return () => {
       observer.disconnect()
+      window.removeEventListener('pointermove', handlePointerMove)
       // Clean up button event listeners
       buttonHandlers.forEach(({ element, enter, leave }) => {
         element.removeEventListener('mouseenter', enter)
@@ -537,17 +563,22 @@ function App() {
       </div>
       <header className="portfolio-header" ref={headerRef}>
         <div className="logo">Satyabrata</div>
-        <nav className="nav">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#hackathons">Hackathons</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+        <nav className={`nav ${isNavOpen ? 'nav-open' : ''}`}>
+          <a href="#home" onClick={() => setIsNavOpen(false)}>Home</a>
+          <a href="#about" onClick={() => setIsNavOpen(false)}>About</a>
+          <a href="#education" onClick={() => setIsNavOpen(false)}>Education</a>
+          <a href="#skills" onClick={() => setIsNavOpen(false)}>Skills</a>
+          <a href="#experience" onClick={() => setIsNavOpen(false)}>Experience</a>
+          <a href="#hackathons" onClick={() => setIsNavOpen(false)}>Hackathons</a>
+          <a href="#projects" onClick={() => setIsNavOpen(false)}>Projects</a>
+          <a href="#contact" onClick={() => setIsNavOpen(false)}>Contact</a>
         </nav>
-        <button className="nav-menu" aria-label="Open navigation menu">
+        <button
+          className={`nav-menu ${isNavOpen ? 'nav-menu-open' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isNavOpen}
+          onClick={() => setIsNavOpen((open) => !open)}
+        >
           <span />
           <span />
           <span />
@@ -590,9 +621,25 @@ function App() {
               <span>Docker</span>
               <span>CV / MLE</span>
             </div>
+            <div className="hero-metrics" aria-label="Portfolio highlights">
+              <div className="hero-metric">
+                <strong>2.5+</strong>
+                <span>Years shipping software</span>
+              </div>
+              <div className="hero-metric">
+                <strong>5K+</strong>
+                <span>Monthly users improved</span>
+              </div>
+              <div className="hero-metric">
+                <strong>48h</strong>
+                <span>Hackathon builds</span>
+              </div>
+            </div>
           </div>
 
           <div className="hero-portrait-wrapper">
+            <div className="hero-orbit hero-orbit-1" />
+            <div className="hero-orbit hero-orbit-2" />
             <div className="hero-portrait-ring" />
             <img
               src="/profile_pic.jpeg"
@@ -600,6 +647,9 @@ function App() {
               className="hero-portrait"
             />
           </div>
+          <a className="scroll-cue" href="#about" aria-label="Scroll to About">
+            <span />
+          </a>
         </section>
 
         {/* About / Services Section */}
@@ -1044,6 +1094,8 @@ function App() {
                       src="/Project_images/arc_facilities.png"
                       alt="ARC Facilities"
                       className="project-card-img project-card-img--logo"
+                      loading="lazy"
+                      onError={handleProjectImageError}
                     />
 
                     {/* ✅ Hover Pill (shows only on hover) */}
@@ -1162,10 +1214,7 @@ function App() {
                       alt="ARC Print"
                       className="project-card-img project-card-img--logo"
                       loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                        e.currentTarget.nextElementSibling?.classList.add("visible");
-                      }}
+                      onError={handleProjectImageError}
                     />
 
                     {/* Hover pill */}
@@ -1234,7 +1283,13 @@ function App() {
               <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
-                    <img src="/Project_images/intelligent-bistro.png" alt="Intelligent Bistro" />
+                    <img
+                      src="/Project_images/intelligent-bistro.png"
+                      alt="Intelligent Bistro"
+                      className="project-card-img"
+                      loading="lazy"
+                      onError={handleProjectImageError}
+                    />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">🍽️</span>
                       <span>React Native · Gemini AI</span>
@@ -1292,7 +1347,13 @@ function App() {
               <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
-                    <img src="/Project_images/SummarIQ.png" alt="SummarIQ"/>
+                    <img
+                      src="/Project_images/SummarIQ.png"
+                      alt="SummarIQ"
+                      className="project-card-img"
+                      loading="lazy"
+                      onError={handleProjectImageError}
+                    />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">Σ</span>
                       <span>NLP · Summarization</span>
@@ -1353,6 +1414,8 @@ function App() {
                       src="/Project_images/Ship_detection.png"
                       alt="ShipSight AI"
                       className="project-card-img project-card-img--logo"
+                      loading="lazy"
+                      onError={handleProjectImageError}
                     />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">🛰️</span>
@@ -1409,7 +1472,13 @@ function App() {
               <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
-                    <img src="/Project_images/Wi_protect.png" alt="WiProtect"/>
+                    <img
+                      src="/Project_images/Wi_protect.png"
+                      alt="WiProtect"
+                      className="project-card-img"
+                      loading="lazy"
+                      onError={handleProjectImageError}
+                    />
                     <div className="project-card-placeholder">
                       <span className="project-placeholder-icon">📶</span>
                       <span>iOS · Security</span>
