@@ -851,11 +851,37 @@ function App() {
           <div className="section-header">
             <h2>Work experience</h2>
             <p className="section-subtitle">
-              Production iOS + systems work, with measurable impact.
+              Current computer vision work plus production iOS and systems experience.
             </p>
           </div>
 
           <div className="timeline">
+            <article className="timeline-item">
+              <div className="timeline-marker" />
+              <div className="timeline-card">
+                <div className="timeline-top">
+                  <h3>Evy</h3>
+                  <span className="pill">May 2026 – Present, Florida, USA</span>
+                </div>
+                <p className="muted">Computer Vision Engineer – Eye Tracking &amp; ML</p>
+                <ul className="bullets">
+                  <li>
+                    Built real-time eye tracking and blink detection systems for AI interview monitoring using
+                    Python, OpenCV, and MediaPipe, improving gaze estimation accuracy and reducing false positives
+                    across varied lighting, webcams, and user environments.
+                  </li>
+                  <li>
+                    Prototyped PyTorch and TensorFlow models that classify user behavior from gaze and blink data,
+                    plus anomaly detection to flag suspicious interview patterns with higher reliability.
+                  </li>
+                  <li>
+                    Optimized PyTorch inference pipelines to reduce latency, integrated browser-based computer vision
+                    with WebGL, and worked with founders to launch a deployment supporting multiple concurrent users.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
             <article className="timeline-item">
               <div className="timeline-marker" />
               <div className="timeline-card">
