@@ -851,7 +851,7 @@ function App() {
           <div className="section-header">
             <h2>Work experience</h2>
             <p className="section-subtitle">
-              Current computer vision work plus production iOS and systems experience.
+              Computer vision, ML research, full-stack engineering, and production systems experience.
             </p>
           </div>
 
@@ -861,22 +861,90 @@ function App() {
               <div className="timeline-card">
                 <div className="timeline-top">
                   <h3>Evy</h3>
-                  <span className="pill">May 2026 – Present, Florida, USA</span>
+                  <span className="pill">May 2026 – Present · Part-time · Florida, USA · Remote</span>
                 </div>
-                <p className="muted">Computer Vision Engineer – Eye Tracking &amp; ML</p>
+                <p className="muted">Computer Vision Engineer — Eye Tracking &amp; ML</p>
                 <ul className="bullets">
                   <li>
-                    Built real-time eye tracking and blink detection systems for AI interview monitoring using
-                    Python, OpenCV, and MediaPipe, improving gaze estimation accuracy and reducing false positives
-                    across varied lighting, webcams, and user environments.
+                    Build real-time eye tracking, iris detection, and blink detection for AI interview monitoring
+                    using Python, OpenCV, and MediaPipe, sustaining <strong>40 FPS</strong> real-time inference on standard
+                    consumer webcams.
                   </li>
                   <li>
-                    Prototyped PyTorch and TensorFlow models that classify user behavior from gaze and blink data,
-                    plus anomaly detection to flag suspicious interview patterns with higher reliability.
+                    Improve gaze estimation accuracy and model robustness under glasses glare, off-axis head pose,
+                    and low-light conditions through calibration validation and adaptive thresholding, validated
+                    across <strong>50+</strong> test configurations.
                   </li>
                   <li>
-                    Optimized PyTorch inference pipelines to reduce latency, integrated browser-based computer vision
-                    with WebGL, and worked with founders to launch a deployment supporting multiple concurrent users.
+                    Develop deep learning anomaly detection models in PyTorch and TensorFlow that classify behavioral
+                    patterns from three signal streams: gaze direction, iris movement, and blink cadence.
+                  </li>
+                  <li>
+                    Engineer browser-based model inference and deployment pipelines for real-time gaze tracking,
+                    holding frame-rate performance on lower-end consumer hardware without degrading accuracy.
+                  </li>
+                  <li>
+                    Own the eye-tracking system end to end alongside the founding team, from prototype through
+                    evaluation to the first production release.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <div className="timeline-marker" />
+              <div className="timeline-card">
+                <div className="timeline-top">
+                  <h3>University of Florida</h3>
+                  <span className="pill">Mar 2026 – May 2026 · Part-time · Florida, USA · On-site</span>
+                </div>
+                <p className="muted">Machine Learning Research Assistant</p>
+                <ul className="bullets">
+                  <li>
+                    Developed video-based kinematic analysis pipelines for Parkinson&apos;s disease assessment using
+                    MediaPipe 3D pose estimation, processing <strong>1,000+</strong> clinical movement recordings.
+                  </li>
+                  <li>
+                    Engineered biomechanical feature extraction from clinical movement recordings, computing joint
+                    angles, angular velocity, movement timing, and left-right symmetry metrics for downstream modeling.
+                  </li>
+                  <li>
+                    Trained regression models mapping extracted movement features to clinician-rated severity scores,
+                    automating a step previously done by manual video review.
+                  </li>
+                  <li>
+                    Delivered a documented, reproducible codebase to the research group, enabling continued analysis
+                    after the assignment ended.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <div className="timeline-marker" />
+              <div className="timeline-card">
+                <div className="timeline-top">
+                  <h3>SouthEnd Psychiatry</h3>
+                  <span className="pill">Sep 2024 – Aug 2025 · Contract · Bronx, NY · Remote</span>
+                </div>
+                <p className="muted">IT &amp; Operations Contractor</p>
+                <ul className="bullets">
+                  <li>
+                    Administered EHR and practice-management systems for a telehealth psychiatry group, supporting
+                    <strong>20</strong> clinicians and <strong>10,000+</strong> patient records under strict HIPAA
+                    confidentiality requirements.
+                  </li>
+                  <li>
+                    Processed patient intake, scheduling, and insurance workflows for <strong>5,000+</strong> appointments
+                    per month, reducing scheduling conflicts by <strong>25%</strong>.
+                  </li>
+                  <li>
+                    Resolved <strong>2,000+</strong> IT support requests per month across telehealth and EHR platforms,
+                    cutting average resolution time by <strong>20%</strong>.
+                  </li>
+                  <li>
+                    Automated intake data reconciliation with Python scripting, eliminating <strong>30 hours</strong> of
+                    manual entry per week.
                   </li>
                 </ul>
               </div>
@@ -887,29 +955,47 @@ function App() {
               <div className="timeline-card">
                 <div className="timeline-top">
                   <h3>ARC Document Solutions</h3>
-                  <span className="pill">Jan 2022 – Sep 2024, India</span>
+                  <span className="pill">Jul 2022 – Sep 2024 · Full-time · Kolkata, India · On-site</span>
                 </div>
                 <p className="muted">Software Engineer</p>
                 <ul className="bullets">
                   <li>
-                    Built and scaled real‑time collaboration systems (WebSocket changesets, QR scanning,
-                    REST APIs), reducing sync latency by <strong>25%</strong> for <strong>1,000+</strong> daily active users.
+                    Engineered a real-time WebSocket sync layer for ARC Facilities (<strong>20K+</strong> monthly active
+                    users), cutting collaboration latency by <strong>25%</strong> and reducing support tickets
+                    ~<strong>30%</strong> quarter over quarter.
                   </li>
                   <li>
-                    Developed an iOS Wi‑Fi security analyzer using Swift and NetworkExtension to detect
-                    WPA/WPA2/WPA3 vulnerabilities across <strong>20+</strong> enterprise devices.
+                    Integrated <strong>5</strong> payment gateways (Razorpay, Paytm, Cashfree, Braintree, Elavon) plus
+                    reCAPTCHA into ARC Print, reducing failed transactions by <strong>15%</strong>.
                   </li>
                   <li>
-                    Improved ARC Print checkout reliability by integrating Paytm, Cashfree, Razorpay,
-                    Braintree, Elavon, plus Google reCAPTCHA — reducing failed transactions by <strong>15%</strong>.
+                    Redesigned the Managed Print Services UI and built a SwiftUI filter interface, increasing order
+                    conversion by <strong>10%</strong>.
                   </li>
                   <li>
-                    Shipped a SwiftUI filtering system, improving product discovery and boosting order conversion by
-                    <strong>10%</strong> for <strong>5K+</strong> monthly users.
+                    Rebuilt the data and concurrency layer with Core Data and GCD multithreading, cutting app load time
+                    by <strong>30%</strong> and eliminating UI freezes flagged in QA.
                   </li>
                   <li>
-                    Collaborated with QA, backend, DevOps, and design teams to deliver secure apps, contributing to a
-                    <strong>30%</strong> drop in customer‑reported defects.
+                    Conducted R&amp;D on WPA, WPA2, and WPA3 Wi-Fi security protocols, evaluating authentication and
+                    encryption trade-offs to strengthen device protection across enterprise deployments.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <div className="timeline-marker" />
+              <div className="timeline-card">
+                <div className="timeline-top">
+                  <h3>ARC Document Solutions</h3>
+                  <span className="pill">Jan 2022 – Jun 2022 · Internship · Kolkata, India</span>
+                </div>
+                <p className="muted">Intern</p>
+                <ul className="bullets">
+                  <li>
+                    Contributed to iOS application development under senior engineers, gaining hands-on experience
+                    with Swift, OOP design patterns, and version control with GitHub.
                   </li>
                 </ul>
               </div>
@@ -920,19 +1006,25 @@ function App() {
               <div className="timeline-card">
                 <div className="timeline-top">
                   <h3>SCI-BI Software Pvt Ltd</h3>
-                  <span className="pill">Jul 2021 – Dec 2021, India</span>
+                  <span className="pill">Jul 2021 – Dec 2021 · Internship · Chennai, India · Remote</span>
                 </div>
                 <p className="muted">Software Trainee</p>
                 <ul className="bullets">
                   <li>
-                    Engineered high‑volume ETL pipelines (SSIS, SSMS, Python) processing millions of records daily with
-                    <strong>99%+</strong> accuracy.
+                    Built Python and SSIS ETL pipelines for the Mahindra Finance project, processing
+                    <strong>10M+</strong> records daily at <strong>99%+</strong> accuracy.
                   </li>
                   <li>
-                    Automated workflows with Python, cutting manual effort by <strong>40%</strong> and saving <strong>20+</strong> hours/week.
+                    Automated ingestion workflows that eliminated <strong>20 hours</strong> of manual operations per week,
+                    freeing the analyst team to focus on insights over data entry.
                   </li>
                   <li>
-                    Optimized SQL queries and ETL transformations, improving execution speed by <strong>30%</strong>.
+                    Optimized SQL queries and data transformations, reducing report generation time by
+                    <strong>40%</strong> for BI stakeholders.
+                  </li>
+                  <li>
+                    Partnered with the BI team to validate reliability across financial datasets, reducing pipeline
+                    failures by <strong>25%</strong>.
                   </li>
                 </ul>
               </div>
