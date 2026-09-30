@@ -4,6 +4,7 @@ import './App.css'
 
 function App() {
   const [isNavOpen, setIsNavOpen] = useState(false)
+  const [leetCodeImgError, setLeetCodeImgError] = useState(false)
   const heroRef = useRef(null)
   const headerRef = useRef(null)
   const aboutRef = useRef(null)
@@ -255,7 +256,7 @@ function App() {
             })
 
             anime({
-              targets: '#skills .info-card',
+              targets: '#skills .skills-grid .info-card',
               opacity: [0, 1],
               scale: [0.8, 1],
               rotateY: [15, 0],
@@ -271,6 +272,15 @@ function App() {
               delay: anime.stagger(30, { start: 800 }),
               duration: 400,
               easing: 'easeOutElastic(1, .5)'
+            })
+
+            anime({
+              targets: '#skills .leetcode-showcase-card',
+              opacity: [0, 1],
+              translateY: [25, 0],
+              duration: 750,
+              delay: 600,
+              easing: 'easeOutExpo'
             })
           }
 
@@ -844,6 +854,121 @@ function App() {
               </div>
             </article>
           </div>
+
+          {/* LeetCode & Problem Solving Activity Showcase */}
+          <div className="leetcode-showcase-container">
+            <article className="leetcode-showcase-card">
+              <div className="leetcode-card-header">
+                <div className="leetcode-header-left">
+                  <span className="leetcode-icon-badge" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="leetcode-title-row">
+                      <h3>Problem Solving &amp; Algorithmic Puzzles</h3>
+                      <span className="pill">LeetCode</span>
+                    </div>
+                    <p className="muted">Data structures &middot; Algorithmic patterns &middot; 52-week consistency</p>
+                  </div>
+                </div>
+                <a
+                  href="https://leetcode.com/u/Satyabratadas10/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="leetcode-view-btn"
+                  aria-label="View Satyabratadas10 on LeetCode"
+                >
+                  <span>View LeetCode Profile</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+
+              <div className="leetcode-card-body">
+                <div className="leetcode-metrics-grid">
+                  <div className="leetcode-metric-box">
+                    <span className="metric-num total">178+</span>
+                    <span className="metric-label">Problems Solved</span>
+                  </div>
+                  <div className="leetcode-metric-box">
+                    <span className="metric-num easy">102</span>
+                    <span className="metric-label">Easy</span>
+                  </div>
+                  <div className="leetcode-metric-box">
+                    <span className="metric-num medium">68</span>
+                    <span className="metric-label">Medium</span>
+                  </div>
+                  <div className="leetcode-metric-box">
+                    <span className="metric-num hard">8</span>
+                    <span className="metric-label">Hard</span>
+                  </div>
+                  <div className="leetcode-metric-box ranking">
+                    <span className="metric-num rank">#976K</span>
+                    <span className="metric-label">Global Rank</span>
+                  </div>
+                </div>
+
+                <div className="leetcode-heatmap-preview">
+                  <a
+                    href="https://leetcode.com/u/Satyabratadas10/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="leetcode-svg-link"
+                    title="Open Satyabrata Das on LeetCode"
+                  >
+                    {!leetCodeImgError ? (
+                      <img
+                        src="https://leetcard.jacoblin.cool/Satyabratadas10?theme=dark&font=source_code_pro&ext=heatmap"
+                        alt="Satyabrata Das LeetCode Stats and 52-Week Activity Heatmap"
+                        className="leetcode-stats-svg"
+                        loading="lazy"
+                        onError={() => setLeetCodeImgError(true)}
+                      />
+                    ) : (
+                      <div className="leetcode-fallback-card">
+                        <div className="leetcode-fallback-header">
+                          <div className="leetcode-fallback-user">
+                            <span className="leetcode-fallback-icon">⚡</span>
+                            <strong>Satyabratadas10</strong>
+                          </div>
+                          <span className="leetcode-fallback-rank">#976,546</span>
+                        </div>
+                        <div className="leetcode-fallback-circle-row">
+                          <div className="leetcode-circle-stat">
+                            <span className="circle-num">178</span>
+                            <span className="circle-sub">Solved</span>
+                          </div>
+                          <div className="leetcode-breakdown-bars">
+                            <div className="bar-row">
+                              <span className="bar-label easy">Easy</span>
+                              <div className="bar-track"><div className="bar-fill easy" style={{ width: '10.5%' }}></div></div>
+                              <span className="bar-val">102 / 968</span>
+                            </div>
+                            <div className="bar-row">
+                              <span className="bar-label medium">Medium</span>
+                              <div className="bar-track"><div className="bar-fill medium" style={{ width: '3.2%' }}></div></div>
+                              <span className="bar-val">68 / 2122</span>
+                            </div>
+                            <div className="bar-row">
+                              <span className="bar-label hard">Hard</span>
+                              <div className="bar-track"><div className="bar-fill hard" style={{ width: '0.8%' }}></div></div>
+                              <span className="bar-val">8 / 979</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="leetcode-fallback-note">52-week streak &middot; Click to view profile on LeetCode &rarr;</p>
+                      </div>
+                    )}
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
 
         {/* Experience Section */}
@@ -860,10 +985,10 @@ function App() {
               <div className="timeline-marker" />
               <div className="timeline-card">
                 <div className="timeline-top">
-                  <h3>Evy</h3>
+                  <h3>evy.io</h3>
                   <span className="pill">May 2026 – Present · Part-time · Florida, USA · Remote</span>
                 </div>
-                <p className="muted">Computer Vision Engineer — Eye Tracking &amp; ML</p>
+                <p className="muted">Software Engineer, Machine Learning</p>
                 <ul className="bullets">
                   <li>
                     Build real-time eye tracking, iris detection, and blink detection for AI interview monitoring
@@ -981,6 +1106,32 @@ function App() {
                     encryption trade-offs to strengthen device protection across enterprise deployments.
                   </li>
                 </ul>
+                <div className="timeline-actions">
+                  <a
+                    href="https://apps.apple.com/in/app/arc-facilities-premier/id6739283887"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="timeline-link-pill"
+                    aria-label="View ARC Facilities on Apple App Store"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.47c.61-.75 1.04-1.8 1.01-2.87-.96.04-2.09.65-2.73 1.4-.56.65-.99 1.7-1.02 2.76 1.07.08 2.14-.54 2.74-1.29z"/>
+                    </svg>
+                    ARC Facilities on App Store
+                  </a>
+                  <a
+                    href="https://apps.apple.com/in/app/arc-print/id1452827125"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="timeline-link-pill"
+                    aria-label="View ARC Print on Apple App Store"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.47c.61-.75 1.04-1.8 1.01-2.87-.96.04-2.09.65-2.73 1.4-.56.65-.99 1.7-1.02 2.76 1.07.08 2.14-.54 2.74-1.29z"/>
+                    </svg>
+                    ARC Print on App Store
+                  </a>
+                </div>
               </div>
             </article>
 
@@ -989,13 +1140,13 @@ function App() {
               <div className="timeline-card">
                 <div className="timeline-top">
                   <h3>ARC Document Solutions</h3>
-                  <span className="pill">Jan 2022 – Jun 2022 · Internship · Kolkata, India</span>
+                  <span className="pill">Jan 2022 – Jun 2022 · Internship · Kolkata, India · On-site</span>
                 </div>
                 <p className="muted">Intern</p>
                 <ul className="bullets">
                   <li>
-                    Contributed to iOS application development under senior engineers, gaining hands-on experience
-                    with Swift, OOP design patterns, and version control with GitHub.
+                    Contributed to iOS application development and software engineering under senior engineers,
+                    utilizing Object-Oriented Programming (OOP), Swift, and GitHub version control.
                   </li>
                 </ul>
               </div>
@@ -1005,7 +1156,7 @@ function App() {
               <div className="timeline-marker" />
               <div className="timeline-card">
                 <div className="timeline-top">
-                  <h3>SCI-BI Software Pvt Ltd</h3>
+                  <h3>SCI-BI</h3>
                   <span className="pill">Jul 2021 – Dec 2021 · Internship · Chennai, India · Remote</span>
                 </div>
                 <p className="muted">Software Trainee</p>
@@ -1045,29 +1196,158 @@ function App() {
             <article className="info-card">
               <div className="info-card-top">
                 <div className="project-card-title-row">
-                  <h3>Hacklytics 2026 — JuggleIQ</h3>
-                  <div className="project-info-with-tooltip">
-                    <a
-                      href="https://devpost.com/software/juggleiq"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-info-icon"
-                      aria-label="View JuggleIQ on Devpost"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
+                  <h3>ShellHacks 2026 — Bend With Us</h3>
+                  <div className="project-card-actions">
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://devpost.com/software/bend-with-us"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Bend With Us on Devpost"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
                       >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                      </svg>
-                    </a>
-                    <span className="project-tooltip">View on Devpost</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on Devpost</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/AIForge10/RehabBuddy"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View RehabBuddy on GitHub"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on GitHub</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://bendwith.us/welcome"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Bend With Us Live App"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View Live App</span>
+                    </div>
+                  </div>
+                </div>
+                <span className="pill">36h ML/HealthTech · Participant</span>
+              </div>
+              <p className="muted">Florida International University · Miami, FL</p>
+              <ul className="bullets">
+                <li>
+                  Built an AI physical therapy platform tracking real-time joint angles and rep counts using on-device MediaPipe Pose, with bilingual audio coaching via ElevenLabs.
+                </li>
+                <li>
+                  Architected the FastAPI backend with WebSockets/SSE for live therapist telemetry, TimescaleDB hypertables (11:1 compression), and Gemini-driven plan suggestions.
+                </li>
+              </ul>
+            </article>
+
+            <article className="info-card">
+              <div className="info-card-top">
+                <div className="project-card-title-row">
+                  <h3>Hacklytics 2026 — JuggleIQ</h3>
+                  <div className="project-card-actions">
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://devpost.com/software/juggleiq"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View JuggleIQ on Devpost"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on Devpost</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/SportsAnalytics10/JuggleIQ"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View JuggleIQ on GitHub"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on GitHub</span>
+                    </div>
                   </div>
                 </div>
                 <span className="pill">48-hour ML/CV hackathon · Participant</span>
@@ -1089,28 +1369,58 @@ function App() {
               <div className="info-card-top">
                 <div className="project-card-title-row">
                   <h3>NASA GeoEMERGE Data Hackathon</h3>
-                  <div className="project-info-with-tooltip">
-                    <a
-                      href="https://devpost.com/software/placeholder-gzdnxm"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-info-icon"
-                      aria-label="View NASA GeoEMERGE project on Devpost"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
+                  <div className="project-card-actions">
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://devpost.com/software/placeholder-gzdnxm"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View NASA GeoEMERGE project on Devpost"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
                       >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                      </svg>
-                    </a>
-                    <span className="project-tooltip">View on Devpost</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on Devpost</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/Satyabratadas/GeoEmerge_hackathon"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View GeoEMERGE on GitHub"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on GitHub</span>
+                    </div>
                   </div>
                 </div>
                 <span className="pill">Intermediate Track – Data Analysis Recognition · Winner</span>
@@ -1723,6 +2033,14 @@ function App() {
                       </svg>
                     </span>
                     GitHub
+                  </a>
+                  <a href="https://leetcode.com/u/Satyabratadas10/" target="_blank" rel="noreferrer" className="contact-link">
+                    <span className="contact-icon contact-icon-leetcode">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                      </svg>
+                    </span>
+                    LeetCode
                   </a>
                   <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="contact-link">
                     <span className="contact-icon">
