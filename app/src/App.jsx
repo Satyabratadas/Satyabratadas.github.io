@@ -1,10 +1,178 @@
 import { useEffect, useRef, useState } from 'react'
 import anime from 'animejs'
+import AsciiRipple from './components/AsciiRipple'
+import AuroraBackground from './components/AuroraBackground'
+import { SKILL_LIST, TECH_STACK_CATEGORIES, SKILLS_DICT } from './data/skillsData'
 import './App.css'
+
+const DEFAULT_LEET_STATS = {
+  totalSolved: 183,
+  easySolved: 102,
+  mediumSolved: 72,
+  hardSolved: 9,
+  ranking: 952407,
+  totalQuestions: 4073,
+  totalEasy: 969,
+  totalMedium: 2124,
+  totalHard: 980,
+  loading: false,
+}
+
+const getInitialLeetStats = () => {
+  try {
+    const cached = localStorage.getItem('satyabrata_leetcode_stats')
+    if (cached) {
+      const parsed = JSON.parse(cached)
+      if (parsed && typeof parsed.totalSolved === 'number') {
+        return { ...DEFAULT_LEET_STATS, ...parsed, loading: false }
+      }
+    }
+  } catch {
+    // ignore
+  }
+  return DEFAULT_LEET_STATS
+}
+
+const formatRankShort = (ranking) => {
+  if (!ranking) return '#952K'
+  if (ranking >= 1000000) return `#${(ranking / 1000000).toFixed(1)}M`
+  if (ranking >= 1000) return `#${Math.round(ranking / 1000)}K`
+  return `#${ranking}`
+}
+
+const formatRankFull = (ranking) => {
+  if (!ranking) return '#952,407'
+  return `#${ranking.toLocaleString()}`
+}
 
 function App() {
   const [isNavOpen, setIsNavOpen] = useState(false)
+  const [leetStats, setLeetStats] = useState(getInitialLeetStats)
   const [leetCodeImgError, setLeetCodeImgError] = useState(false)
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' })
+  const [formSent, setFormSent] = useState(false)
+  const [activeSkillName, setActiveSkillName] = useState('python')
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchLeetCodeData = async () => {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 7000)
+
+      try {
+        const res = await fetch('https://alfa-leetcode-api.onrender.com/userProfile/Satyabratadas10', {
+          signal: controller.signal,
+        })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = await res.json()
+        if (data && typeof data.totalSolved === 'number' && isMounted) {
+          const updated = {
+            totalSolved: data.totalSolved,
+            easySolved: data.easySolved ?? 102,
+            mediumSolved: data.mediumSolved ?? 72,
+            hardSolved: data.hardSolved ?? 9,
+            ranking: data.ranking ?? 952407,
+            totalQuestions: data.totalQuestions ?? 4073,
+            totalEasy: data.totalEasy ?? 969,
+            totalMedium: data.totalMedium ?? 2124,
+            totalHard: data.totalHard ?? 980,
+            loading: false,
+          }
+          setLeetStats(updated)
+          try {
+            localStorage.setItem('satyabrata_leetcode_stats', JSON.stringify(updated))
+          } catch {
+            // ignore
+          }
+        }
+      } catch (err) {
+        if (isMounted && err.name !== 'AbortError') {
+          try {
+            const fbRes = await fetch('https://alfa-leetcode-api.onrender.com/Satyabratadas10/solved')
+            if (fbRes.ok) {
+              const fbData = await fbRes.json()
+              if (fbData && typeof fbData.solvedProblem === 'number' && isMounted) {
+                setLeetStats((prev) => {
+                  const updated = {
+                    ...prev,
+                    totalSolved: fbData.solvedProblem,
+                    easySolved: fbData.easySolved ?? prev.easySolved,
+                    mediumSolved: fbData.mediumSolved ?? prev.mediumSolved,
+                    hardSolved: fbData.hardSolved ?? prev.hardSolved,
+                  }
+                  try {
+                    localStorage.setItem('satyabrata_leetcode_stats', JSON.stringify(updated))
+                  } catch {
+                    // ignore
+                  }
+                  return updated
+                })
+              }
+            }
+          } catch {
+            // retain fallback/cached stats
+          }
+        }
+      } finally {
+        clearTimeout(timeoutId)
+      }
+    }
+
+    fetchLeetCodeData()
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchLeetCodeData()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    const intervalId = setInterval(fetchLeetCodeData, 5 * 60 * 1000)
+
+    return () => {
+      isMounted = false
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      clearInterval(intervalId)
+    }
+  }, [])
+
+  const handleCardMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+  }
+
+  const handleChipClick = (skillName) => {
+    setActiveSkillName(skillName)
+  }
+
+  const handleChipHover = (skillName) => {
+    if (activeSkillName !== skillName) {
+      setActiveSkillName(skillName)
+    }
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    if (!formState.email || !formState.message) return
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formState.name || 'Visitor'}`)
+    const body = encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`)
+    window.open(`mailto:satyabratadas996@gmail.com?subject=${subject}&body=${body}`, '_blank')
+    setFormSent(true)
+  }
+
+  useEffect(() => {
+    document.documentElement.classList.add('dark')
+    try {
+      localStorage.removeItem('portfolio_theme')
+    } catch {
+      // ignore
+    }
+  }, [])
+
   const heroRef = useRef(null)
   const headerRef = useRef(null)
   const aboutRef = useRef(null)
@@ -33,7 +201,7 @@ function App() {
     // Header animation
     anime({
       targets: '.logo',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateY: [-20, 0],
       duration: 800,
       easing: 'easeOutExpo'
@@ -41,7 +209,7 @@ function App() {
 
     anime({
       targets: '.nav a',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateY: [-15, 0],
       delay: anime.stagger(100, { start: 200 }),
       duration: 600,
@@ -51,7 +219,7 @@ function App() {
     // Hero section animations
     anime({
       targets: '.hero-eyebrow',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateX: [-30, 0],
       duration: 800,
       delay: 300,
@@ -61,7 +229,7 @@ function App() {
     anime({
       targets: '.accent-dot',
       scale: [0, 1.5, 1],
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       duration: 600,
       delay: 800,
       easing: 'easeOutElastic(1, .8)'
@@ -69,7 +237,7 @@ function App() {
 
     anime({
       targets: '.hero-subtitle',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateX: [-30, 0],
       duration: 800,
       delay: 500,
@@ -78,7 +246,7 @@ function App() {
 
     anime({
       targets: '.hero-title-inline',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       scale: [0.8, 1],
       duration: 900,
       delay: 700,
@@ -87,7 +255,7 @@ function App() {
 
     anime({
       targets: '.hero-description',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateY: [20, 0],
       duration: 800,
       delay: 900,
@@ -96,7 +264,7 @@ function App() {
 
     anime({
       targets: '.btn',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       scale: [0.9, 1],
       delay: anime.stagger(150, { start: 1100 }),
       duration: 600,
@@ -105,7 +273,7 @@ function App() {
 
     anime({
       targets: '.hero-tech-strip span',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       scale: [0, 1],
       delay: anime.stagger(80, { start: 1400 }),
       duration: 500,
@@ -123,30 +291,21 @@ function App() {
 
     anime({
       targets: '.hero-metric',
-      opacity: [0, 1],
+      opacity: [0.8, 1],
       translateY: [18, 0],
       delay: anime.stagger(120, { start: 1250 }),
       duration: 700,
       easing: 'easeOutExpo'
     })
 
-    // Hero portrait animation
+    // Hero portrait animation rising from the bottom
     anime({
-      targets: '.hero-portrait-ring',
-      scale: [0, 1],
+      targets: '.hero-portrait-wrapper',
       opacity: [0, 1],
-      duration: 1200,
-      delay: 600,
+      translateY: [40, 0],
+      duration: 900,
+      delay: 500,
       easing: 'easeOutExpo'
-    })
-
-    anime({
-      targets: '.hero-portrait',
-      scale: [0, 1],
-      opacity: [0, 1],
-      duration: 1000,
-      delay: 800,
-      easing: 'easeOutElastic(1, .6)'
     })
 
     // Scroll-triggered animations using Intersection Observer
@@ -168,7 +327,7 @@ function App() {
           if (target.classList.contains('about')) {
             anime({
               targets: '.service',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-50, 0],
               delay: anime.stagger(150),
               duration: 800,
@@ -176,8 +335,8 @@ function App() {
             })
 
             anime({
-              targets: '.about-content h2',
-              opacity: [0, 1],
+              targets: '.about-content h2, .about-lead-quote',
+              opacity: [0.8, 1],
               translateY: [-20, 0],
               duration: 700,
               delay: 200,
@@ -185,19 +344,28 @@ function App() {
             })
 
             anime({
-              targets: '.about-content p',
-              opacity: [0, 1],
+              targets: '.about-content > p',
+              opacity: [0.8, 1],
               translateY: [20, 0],
-              delay: anime.stagger(100, { start: 400 }),
+              delay: anime.stagger(100, { start: 350 }),
               duration: 700,
               easing: 'easeOutExpo'
             })
 
             anime({
+              targets: '.about-skill-chip',
+              opacity: [0.8, 1],
+              scale: [0.85, 1],
+              delay: anime.stagger(30, { start: 500 }),
+              duration: 500,
+              easing: 'easeOutBack'
+            })
+
+            anime({
               targets: '.stat',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               scale: [0.8, 1],
-              delay: anime.stagger(100, { start: 700 }),
+              delay: anime.stagger(100, { start: 650 }),
               duration: 600,
               easing: 'easeOutElastic(1, .8)'
             })
@@ -207,7 +375,7 @@ function App() {
           if (target.classList.contains('section') && target.id === 'education') {
             anime({
               targets: '.section-header',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [-30, 0],
               duration: 700,
               easing: 'easeOutExpo'
@@ -215,7 +383,7 @@ function App() {
 
             anime({
               targets: '#education .info-card',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [50, 0],
               scale: [0.9, 1],
               delay: anime.stagger(150, { start: 300 }),
@@ -228,7 +396,7 @@ function App() {
           if (target.id === 'presentation') {
             anime({
               targets: '#presentation .section-header',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [-30, 0],
               duration: 700,
               easing: 'easeOutExpo'
@@ -236,7 +404,7 @@ function App() {
 
             anime({
               targets: '#presentation .info-card',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-50, 0],
               scale: [0.95, 1],
               duration: 800,
@@ -249,37 +417,36 @@ function App() {
           if (target.id === 'skills') {
             anime({
               targets: '#skills .section-header',
-              opacity: [0, 1],
-              translateY: [-30, 0],
-              duration: 700,
+              opacity: [0.8, 1],
+              translateY: [-20, 0],
+              duration: 600,
+              easing: 'easeOutExpo'
+            })
+
+            anime({
+              targets: '#skills .active-skill-spotlight',
+              opacity: [0.8, 1],
+              translateY: [-15, 0],
+              duration: 600,
+              delay: 150,
               easing: 'easeOutExpo'
             })
 
             anime({
               targets: '#skills .skills-grid .info-card',
-              opacity: [0, 1],
-              scale: [0.8, 1],
-              rotateY: [15, 0],
-              delay: anime.stagger(100, { start: 300 }),
-              duration: 700,
-              easing: 'easeOutElastic(1, .7)'
-            })
-
-            anime({
-              targets: '#skills .chip',
-              opacity: [0, 1],
-              scale: [0, 1],
-              delay: anime.stagger(30, { start: 800 }),
-              duration: 400,
-              easing: 'easeOutElastic(1, .5)'
+              opacity: [0.8, 1],
+              translateY: [25, 0],
+              delay: anime.stagger(80, { start: 200 }),
+              duration: 600,
+              easing: 'easeOutExpo'
             })
 
             anime({
               targets: '#skills .leetcode-showcase-card',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [25, 0],
-              duration: 750,
-              delay: 600,
+              duration: 700,
+              delay: 450,
               easing: 'easeOutExpo'
             })
           }
@@ -288,37 +455,38 @@ function App() {
           if (target.id === 'experience') {
             anime({
               targets: '#experience .section-header',
-              opacity: [0, 1],
-              translateY: [-30, 0],
+              opacity: [0.7, 1],
+              translateY: [-24, 0],
               duration: 700,
               easing: 'easeOutExpo'
             })
 
             anime({
               targets: '.timeline-marker',
-              scale: [0, 1],
-              opacity: [0, 1],
-              delay: anime.stagger(200, { start: 300 }),
-              duration: 600,
-              easing: 'easeOutElastic(1, .8)'
+              scale: [0, 1.25, 1],
+              opacity: [0.5, 1],
+              delay: anime.stagger(130, { start: 250 }),
+              duration: 650,
+              easing: 'easeOutElastic(1, .75)'
             })
 
             anime({
               targets: '.timeline-card',
-              opacity: [0, 1],
-              translateX: [-50, 0],
-              delay: anime.stagger(200, { start: 400 }),
-              duration: 800,
-              easing: 'easeOutExpo'
+              opacity: [0.7, 1],
+              translateX: [-32, 0],
+              scale: [0.97, 1],
+              delay: anime.stagger(140, { start: 300 }),
+              duration: 750,
+              easing: 'easeOutCubic'
             })
 
             anime({
               targets: '.timeline-card li',
-              opacity: [0, 1],
-              translateX: [-20, 0],
-              delay: anime.stagger(50, { start: 800 }),
-              duration: 500,
-              easing: 'easeOutExpo'
+              opacity: [0.6, 1],
+              translateX: [-14, 0],
+              delay: anime.stagger(30, { start: 600 }),
+              duration: 450,
+              easing: 'easeOutQuad'
             })
           }
 
@@ -326,7 +494,7 @@ function App() {
           if (target.id === 'hackathons') {
             anime({
               targets: '#hackathons .section-header',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [-30, 0],
               duration: 700,
               easing: 'easeOutExpo'
@@ -334,7 +502,7 @@ function App() {
 
             anime({
               targets: '#hackathons .info-card',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [50, 0],
               scale: [0.9, 1],
               delay: anime.stagger(150, { start: 300 }),
@@ -347,7 +515,7 @@ function App() {
           if (target.classList.contains('projects')) {
             anime({
               targets: '.projects h2',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [-30, 0],
               duration: 700,
               easing: 'easeOutExpo'
@@ -355,7 +523,7 @@ function App() {
 
             anime({
               targets: '.project-card',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [50, 0],
               scale: [0.9, 1],
               delay: anime.stagger(150, { start: 300 }),
@@ -365,7 +533,7 @@ function App() {
 
             anime({
               targets: '.project-tags li',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               scale: [0, 1],
               delay: anime.stagger(40, { start: 800 }),
               duration: 400,
@@ -377,7 +545,7 @@ function App() {
           if (target.classList.contains('contact')) {
             anime({
               targets: '.contact-header-wrapper h2',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-30, 0],
               duration: 700,
               easing: 'easeOutExpo'
@@ -385,7 +553,7 @@ function App() {
 
             anime({
               targets: '.contact-subtitle',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [20, 0],
               duration: 700,
               delay: 200,
@@ -394,7 +562,7 @@ function App() {
 
             anime({
               targets: '.contact-highlight',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               scale: [0.95, 1],
               translateY: [30, 0],
               duration: 900,
@@ -404,7 +572,7 @@ function App() {
 
             anime({
               targets: '.contact-info h3',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-20, 0],
               duration: 600,
               delay: 600,
@@ -413,7 +581,7 @@ function App() {
 
             anime({
               targets: '.contact-location',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-20, 0],
               duration: 600,
               delay: 680,
@@ -422,7 +590,7 @@ function App() {
 
             anime({
               targets: '.contact-link-primary, .contact-link',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateX: [-30, 0],
               scale: [0.95, 1],
               delay: anime.stagger(100, { start: 800 }),
@@ -435,7 +603,7 @@ function App() {
           if (target.classList.contains('portfolio-footer')) {
             anime({
               targets: '.portfolio-footer span',
-              opacity: [0, 1],
+              opacity: [0.8, 1],
               translateY: [20, 0],
               duration: 600,
               easing: 'easeOutExpo'
@@ -560,167 +728,253 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const scrollToHash = () => {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          window.scrollTo(0, el.offsetTop);
+        }
+      };
+      scrollToHash();
+      const timer = setTimeout(scrollToHash, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [])
+
   return (
-    <div className="portfolio">
-      {/* Techy animated background */}
-      <div className="portfolio-bg" aria-hidden="true">
-        <div className="bg-grid" />
-        <div className="bg-glow bg-glow-1" />
-        <div className="bg-glow bg-glow-2" />
-        <div className="bg-glow bg-glow-3" />
-        <div className="bg-dots" />
-        <div className="bg-scanline" />
-      </div>
-      <header className="portfolio-header" ref={headerRef}>
-        <div className="logo">Satyabrata</div>
-        <nav className={`nav ${isNavOpen ? 'nav-open' : ''}`}>
-          <a href="#home" onClick={() => setIsNavOpen(false)}>Home</a>
-          <a href="#about" onClick={() => setIsNavOpen(false)}>About</a>
-          <a href="#education" onClick={() => setIsNavOpen(false)}>Education</a>
-          <a href="#skills" onClick={() => setIsNavOpen(false)}>Skills</a>
-          <a href="#experience" onClick={() => setIsNavOpen(false)}>Experience</a>
-          <a href="#hackathons" onClick={() => setIsNavOpen(false)}>Hackathons</a>
-          <a href="#projects" onClick={() => setIsNavOpen(false)}>Projects</a>
-          <a href="#contact" onClick={() => setIsNavOpen(false)}>Contact</a>
-        </nav>
-        <button
-          className={`nav-menu ${isNavOpen ? 'nav-menu-open' : ''}`}
-          aria-label="Toggle navigation menu"
-          aria-expanded={isNavOpen}
-          onClick={() => setIsNavOpen((open) => !open)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </header>
+    <>
+      {/* Aurora Ambient Mesh & Perspective Grid */}
+      <AuroraBackground />
 
-      <main>
-        {/* Hero Section */}
-        <section id="home" className="hero" ref={heroRef}>
-          <div className="hero-text">
-            <p className="hero-eyebrow">Hello<span className="accent-dot">.</span></p>
-            <p className="hero-subtitle">I&apos;m Satyabrata</p>
-            <h1 className="hero-title-inline">Software Engineer</h1>
-            <p className="hero-description">
-              I design and build production-grade Machine Learning and Computer Vision systems —
-              from real-time inference pipelines to scalable AI backends and reliable intelligent applications.
-            </p>
-            <div className="hero-actions">
-              <a
-                className="btn btn-primary"
-                href="mailto:satyabratadas996@gmail.com?subject=Project%20Inquiry"
-              >
-                Got a project?
-              </a>
-              <a
-                className="btn btn-outline"
-                href="/Satyabrata_Software_engineer_resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                My resume
-              </a>
-            </div>
-            <div className="hero-tech-strip">
-              <span>Python</span>
-              <span>PyTorch</span>
-              <span>YOLO</span>
-              <span>FastAPI</span>
-              <span>Swift</span>
-              <span>Docker</span>
-              <span>CV / MLE</span>
-            </div>
-            <div className="hero-metrics" aria-label="Portfolio highlights">
-              <div className="hero-metric">
-                <strong>2.5+</strong>
-                <span>Years shipping software</span>
-              </div>
-              <div className="hero-metric">
-                <strong>5K+</strong>
-                <span>Monthly users improved</span>
-              </div>
-              <div className="hero-metric">
-                <strong>48h</strong>
-                <span>Hackathon builds</span>
-              </div>
-            </div>
+      <div className="portfolio">
+        <header className="portfolio-header" ref={headerRef}>
+          <div className="logo">Satyabrata</div>
+          <nav className={`nav ${isNavOpen ? 'nav-open' : ''}`}>
+            <a href="#home" onClick={() => setIsNavOpen(false)}>Home</a>
+            <a href="#about" onClick={() => setIsNavOpen(false)}>About</a>
+            <a href="#education" onClick={() => setIsNavOpen(false)}>Education</a>
+            <a href="#skills" onClick={() => setIsNavOpen(false)}>Skills</a>
+            <a href="#experience" onClick={() => setIsNavOpen(false)}>Experience</a>
+            <a href="#hackathons" onClick={() => setIsNavOpen(false)}>Hackathons</a>
+            <a href="#projects" onClick={() => setIsNavOpen(false)}>Projects</a>
+            <a href="#contact" onClick={() => setIsNavOpen(false)}>Contact</a>
+          </nav>
+          <div className="header-actions">
+            <button
+              className={`nav-menu ${isNavOpen ? 'nav-menu-open' : ''}`}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isNavOpen}
+              onClick={() => setIsNavOpen((open) => !open)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
           </div>
+        </header>
 
-          <div className="hero-portrait-wrapper">
-            <div className="hero-orbit hero-orbit-1" />
-            <div className="hero-orbit hero-orbit-2" />
-            <div className="hero-portrait-ring" />
-            <img
-              src="/profile_pic.jpeg"
-              alt="Portrait of Satyabrata Das"
-              className="hero-portrait"
-            />
-          </div>
-          <a className="scroll-cue" href="#about" aria-label="Scroll to About">
-            <span />
-          </a>
-        </section>
-
-        {/* About / Services Section */}
-        <section id="about" className="about" ref={aboutRef}>
-          <div className="about-grid">
-            <div className="about-services">
-              <div className="service">
-                <div className="service-icon">👁️</div>
-                <div className="service-content">
-                  <h3>Computer Vision</h3>
-                  <p>Real-time inference pipelines with YOLO and MediaPipe for object detection and spatial tracking.</p>
-                </div>
-              </div>
-              <div className="service">
-                <div className="service-icon">🧠</div>
-                <div className="service-content">
-                  <h3>ML Engineering</h3>
-                  <p>End-to-end pipelines from PyTorch training to high-throughput, low-latency deployment.</p>
-                </div>
-              </div>
-              <div className="service">
-                <div className="service-icon">⚙️</div>
-                <div className="service-content">
-                  <h3>System Reliability</h3>
-                  <p>Production AI systems built for performance and reliability under real-world load.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="about-content">
-              <h2>About me</h2>
-              <p>
-                I&apos;m a Software Engineer and M.S. in AI Systems student at the University of Florida,
-                specializing in high-performance, production-grade Machine Learning and Computer Vision systems.
-                With over 2.5 years of professional experience, I focus on the full lifecycle of intelligent
-                systems — taking models from research and notebooks into robust, scalable, real-time environments.
+        <main>
+          {/* Hero Section */}
+          <section id="home" className="hero" ref={heroRef}>
+            <div className="hero-text">
+              <p className="hero-eyebrow">Hi, I am</p>
+              <h1 className="hero-name-heading">Satyabrata Das</h1>
+              <p className="hero-subtitle-tagline">
+                Computer Vision &amp; Machine Learning Engineer building AI systems that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
               </p>
-              <p>
-                My work centers on real-time CV pipelines (YOLO, MediaPipe), ML engineering with PyTorch,
-                and deployment that meets strict latency and throughput requirements. I bring a strong
-                foundation in optimization and neural network theory to the engineering process, so design
-                decisions are informed by both theory and production constraints.
-              </p>
+              
+              <ul className="hero-credentials-list">
+                <li>
+                  <span className="hero-cred-role">Computer Vision Engineer</span>
+                  <span className="hero-cred-sep">/</span>
+                  <span className="hero-cred-org">evy.io</span>
+                </li>
+                <li>
+                  <span className="hero-cred-role">Machine Learning Research Assistant</span>
+                  <span className="hero-cred-sep">/</span>
+                  <span className="hero-cred-org">University of Florida</span>
+                </li>
+                <li>
+                  <span className="hero-cred-role">Software Engineer</span>
+                  <span className="hero-cred-sep">/</span>
+                  <span className="hero-cred-org">ARC Document Solutions</span>
+                </li>
+              </ul>
 
-              <div className="about-stats">
-                <div className="stat">
-                  <span className="stat-number">1,000+</span>
-                  <span className="stat-label">Daily active users impacted</span>
+              <div className="hero-announcement-pill">
+                <span className="pill-emoji">👋</span>
+                <span>Available for Machine Learning &amp; Systems roles — <a href="mailto:satyabratadas996@gmail.com" className="pill-link">satyabratadas996@gmail.com</a></span>
+              </div>
+
+              <div className="hero-actions">
+                <a
+                  className="btn btn-primary"
+                  href="/Satyabrata_Software_engineer_resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="btn-icon">📄</span>
+                  <span>Résumé</span>
+                </a>
+                <a
+                  className="btn btn-outline"
+                  href="mailto:satyabratadas996@gmail.com?subject=Project%20or%20Opportunity%20Inquiry"
+                >
+                  <span className="btn-icon">✉️</span>
+                  <span>Get in touch</span>
+                </a>
+              </div>
+
+              <div className="hero-social-row">
+                <a
+                  href="https://github.com/Satyabratadas"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-btn"
+                  aria-label="GitHub Profile"
+                  title="GitHub"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/satyabrata-lm10/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-btn"
+                  aria-label="LinkedIn Profile"
+                  title="LinkedIn"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a
+                  href="mailto:satyabratadas996@gmail.com"
+                  className="hero-social-btn"
+                  aria-label="Email Satyabrata"
+                  title="Email"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Right side: Profile picture anchored from the bottom */}
+            <div className="hero-portrait-wrapper" role="region" aria-label="Satyabrata Das profile photo">
+              <div className="hero-portrait-ambient-glow" aria-hidden="true" />
+              <div className="hero-portrait-frame">
+                <img
+                  src="/profile_pic.jpeg"
+                  alt="Portrait of Satyabrata Das"
+                  className="hero-portrait-img"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </div>
+            </div>
+
+            <a className="scroll-cue" href="#about" aria-label="Scroll to About">
+              <span />
+            </a>
+          </section>
+
+          {/* About / Services Section */}
+          <section id="about" className="about" ref={aboutRef}>
+            <div className="about-grid">
+              <div className="about-services">
+                <div className="service">
+                  <div className="service-icon">👁️</div>
+                  <div className="service-content">
+                    <h3>Computer Vision &amp; Gaze</h3>
+                    <p>Real-time iris/pupil tracking, gaze estimation, and blink anomaly detection across edge webcam hardware.</p>
+                  </div>
                 </div>
-                <div className="stat">
-                  <span className="stat-number">30%</span>
-                  <span className="stat-label">Defect reduction delivered</span>
+                <div className="service">
+                  <div className="service-icon">⚡</div>
+                  <div className="service-content">
+                    <h3>Production ML &amp; MLOps</h3>
+                    <p>PyTorch pipelines, sub-1.4s model serving, Dockerized FastAPI backends, and Prometheus/Grafana telemetry.</p>
+                  </div>
                 </div>
-                <div className="stat">
-                  <span className="stat-number">2+</span>
-                  <span className="stat-label">Years of experience</span>
+                <div className="service">
+                  <div className="service-icon">🌐</div>
+                  <div className="service-content">
+                    <h3>Scalable Real-Time Systems</h3>
+                    <p>WebSocket sync for 20,000+ active users, 10M+ records/day ETL pipelines, and resilient distributed architecture.</p>
+                  </div>
+                </div>
+
+                <div className="about-skills-block">
+                  <span className="about-skills-title">Core Skills</span>
+                  <div className="about-skills-chips">
+                    {[
+                      'Python',
+                      'PyTorch',
+                      'TensorFlow',
+                      'OpenCV',
+                      'MediaPipe',
+                      'YOLO',
+                      'Deep Learning',
+                      'Convolutional Neural Networks',
+                      'Transformers',
+                      'NLP',
+                      'Large Language Models',
+                      'Gaze Estimation',
+                      'Pose Estimation',
+                      'Model Deployment',
+                      'Production Deployment',
+                      'MLOps',
+                      'Problem Solving',
+                      'Data Structures & Algorithms',
+                      'FastAPI',
+                      'Docker',
+                      'SQL',
+                      'Git'
+                    ].map((skill) => (
+                      <span key={skill} className="about-skill-chip">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="about-content">
+                <h2>About me</h2>
+                <div className="about-lead-quote">
+                  <p className="about-lead-text">
+                    Computer Vision &amp; Machine Learning Engineer building AI systems that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
+                  </p>
+                </div>
+
+                <p>
+                  I&apos;m completing my M.S. in AI Systems at the University of Florida while working as a Computer Vision Engineer at Evy, where I build real-time eye tracking and behavioral analysis for AI-powered interview monitoring. My work covers MediaPipe Iris-based iris and pupil tracking, gaze estimation, blink detection, and behavioral anomaly detection — running in real time across varied lighting conditions, webcam hardware, and user environments.
+                </p>
+                <p>
+                  Before moving into AI, I spent 2+ years as a Software Engineer at ARC Document Solutions. There I engineered a real-time WebSocket sync layer for a product with 20,000+ monthly active users, reduced collaboration latency by 25%, integrated five payment gateways to cut failed transactions by 15%, and shipped iOS features that lifted order conversion by 10%. Earlier, I built Python and SSIS ETL pipelines processing 10M+ records per day at 99%+ accuracy, eliminating 20 hours of manual operations per week.
+                </p>
+                {/* <p>
+                  That production background shapes how I build ML: I care as much about latency, monitoring, and deployment as about model accuracy. Two recent projects reflect that — <a href="#hackathons" className="about-inline-link">JuggleIQ</a>, a YOLO and MediaPipe soccer analytics pipeline generating 1,000+ frame-level inferences per session, and <a href="#projects" className="about-inline-link">SummarIQ</a>, a T5/BART research-paper summarizer serving predictions at under 1.4s average latency with Prometheus and Grafana instrumentation.
+                </p> */}
+
+                <div className="about-stats">
+                  <div className="stat">
+                    <span className="stat-number">20,000+</span>
+                    <span className="stat-label">Monthly active users supported</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-number">10M+</span>
+                    <span className="stat-label">Daily records processed (ETL)</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-number">25%</span>
+                    <span className="stat-label">Collaboration latency reduced</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-number">2+</span>
+                    <span className="stat-label">Years production engineering</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
         {/* Education Section */}
         <section id="education" className="section" ref={educationRef}>
@@ -784,75 +1038,74 @@ function App() {
         {/* Skills Section */}
         <section id="skills" className="section" ref={skillsRef}>
           <div className="section-header">
-            <h2>Skills</h2>
-            <p className="section-subtitle">A quick snapshot based on my resume.</p>
+            <h2>Tech Stack</h2>
+            <p className="section-subtitle">Core languages, backend architectures, cloud databases &amp; machine learning</p>
           </div>
 
-          <div className="skills-grid">
-            <article className="info-card">
-              <h3>Languages</h3>
-              <div className="chips">
-                <span className="chip">Python</span>
-                <span className="chip">Swift</span>
-                <span className="chip">C++</span>
-                <span className="chip">SQL</span>
+          {/* Interactive Skill Spotlight */}
+          {SKILLS_DICT[activeSkillName] && (
+            <div className="active-skill-spotlight" role="region" aria-label="Selected skill details">
+              <div className="active-skill-spotlight-content">
+                {SKILLS_DICT[activeSkillName].icon && (
+                  <div
+                    className="active-skill-icon-wrapper"
+                    style={{ borderColor: SKILLS_DICT[activeSkillName].color || 'var(--primary)' }}
+                  >
+                    <img
+                      src={SKILLS_DICT[activeSkillName].icon}
+                      alt=""
+                      className="active-skill-spotlight-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
+                <div className="active-skill-info">
+                  <div className="active-skill-title-row">
+                    <h3>{SKILLS_DICT[activeSkillName].label}</h3>
+                    <span className="active-skill-category-badge">{SKILLS_DICT[activeSkillName].category}</span>
+                  </div>
+                  <p className="active-skill-description">{SKILLS_DICT[activeSkillName].shortDescription}</p>
+                </div>
               </div>
-            </article>
+            </div>
+          )}
 
-            <article className="info-card">
-              <h3>Machine Learning</h3>
-              <div className="chips">
-                <span className="chip">PyTorch</span>
-                <span className="chip">scikit-learn</span>
-                <span className="chip">Transformers</span>
-                <span className="chip">NLP</span>
-                <span className="chip">NumPy</span>
-                <span className="chip">Pandas</span>
-              </div>
-            </article>
-
-            <article className="info-card">
-              <h3>Computer Vision</h3>
-              <div className="chips">
-                <span className="chip">Image Processing</span>
-                <span className="chip">Filtering</span>
-                <span className="chip">Edge Detection</span>
-                <span className="chip">Segmentation</span>
-                <span className="chip">Object Recognition</span>
-              </div>
-            </article>
-
-            <article className="info-card">
-              <h3>Backend &amp; Systems</h3>
-              <div className="chips">
-                <span className="chip">FastAPI</span>
-                <span className="chip">Microservices</span>
-                <span className="chip">Docker</span>
-                <span className="chip">REST APIs</span>
-                <span className="chip">Prometheus</span>
-                <span className="chip">Grafana</span>
-              </div>
-            </article>
-
-            <article className="info-card">
-              <h3>iOS Development</h3>
-              <div className="chips">
-                <span className="chip">SwiftUI</span>
-                <span className="chip">Xcode</span>
-                <span className="chip">Core Data</span>
-                <span className="chip">NetworkExtension</span>
-              </div>
-            </article>
-
-            <article className="info-card">
-              <h3>Core CS</h3>
-              <div className="chips">
-                <span className="chip">Data Structures</span>
-                <span className="chip">Algorithms</span>
-                <span className="chip">OOP</span>
-                <span className="chip">Git</span>
-              </div>
-            </article>
+          <div className="skills-grid skills-five-grid">
+            {TECH_STACK_CATEGORIES.map((cat) => (
+              <article key={cat.title} className="info-card skill-category-card">
+                <h3>{cat.title}</h3>
+                <div className="chips">
+                  {cat.skills.map((skill) => {
+                    const isActive = activeSkillName === skill.name
+                    const skillData = SKILLS_DICT[skill.name]
+                    return (
+                      <button
+                        key={skill.name}
+                        type="button"
+                        className={`chip interactive-chip ${isActive ? 'is-active' : ''}`}
+                        onClick={() => handleChipClick(skill.name)}
+                        onMouseEnter={() => handleChipHover(skill.name)}
+                        title={skillData?.shortDescription || skill.label}
+                        aria-label={`Select skill ${skill.label}`}
+                      >
+                        {skillData?.icon && (
+                          <img
+                            src={skillData.icon}
+                            alt=""
+                            className="chip-icon"
+                            aria-hidden="true"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none'
+                            }}
+                          />
+                        )}
+                        <span>{skill.label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </article>
+            ))}
           </div>
 
           {/* LeetCode & Problem Solving Activity Showcase */}
@@ -868,7 +1121,10 @@ function App() {
                   <div>
                     <div className="leetcode-title-row">
                       <h3>Problem Solving &amp; Algorithmic Puzzles</h3>
-                      <span className="pill">LeetCode</span>
+                      <span className="pill leetcode-sync-pill" title="Live synchronized with LeetCode">
+                        <span className="sync-dot"></span>
+                        LeetCode Live
+                      </span>
                     </div>
                     <p className="muted">Data structures &middot; Algorithmic patterns &middot; 52-week consistency</p>
                   </div>
@@ -892,23 +1148,23 @@ function App() {
               <div className="leetcode-card-body">
                 <div className="leetcode-metrics-grid">
                   <div className="leetcode-metric-box">
-                    <span className="metric-num total">178+</span>
+                    <span className="metric-num total">{leetStats.totalSolved}</span>
                     <span className="metric-label">Problems Solved</span>
                   </div>
                   <div className="leetcode-metric-box">
-                    <span className="metric-num easy">102</span>
+                    <span className="metric-num easy">{leetStats.easySolved}</span>
                     <span className="metric-label">Easy</span>
                   </div>
                   <div className="leetcode-metric-box">
-                    <span className="metric-num medium">68</span>
+                    <span className="metric-num medium">{leetStats.mediumSolved}</span>
                     <span className="metric-label">Medium</span>
                   </div>
                   <div className="leetcode-metric-box">
-                    <span className="metric-num hard">8</span>
+                    <span className="metric-num hard">{leetStats.hardSolved}</span>
                     <span className="metric-label">Hard</span>
                   </div>
-                  <div className="leetcode-metric-box ranking">
-                    <span className="metric-num rank">#976K</span>
+                  <div className="leetcode-metric-box ranking" title={`LeetCode Global Rank: ${formatRankFull(leetStats.ranking)}`}>
+                    <span className="metric-num rank">{formatRankShort(leetStats.ranking)}</span>
                     <span className="metric-label">Global Rank</span>
                   </div>
                 </div>
@@ -936,28 +1192,43 @@ function App() {
                             <span className="leetcode-fallback-icon">⚡</span>
                             <strong>Satyabratadas10</strong>
                           </div>
-                          <span className="leetcode-fallback-rank">#976,546</span>
+                          <span className="leetcode-fallback-rank">{formatRankFull(leetStats.ranking)}</span>
                         </div>
                         <div className="leetcode-fallback-circle-row">
                           <div className="leetcode-circle-stat">
-                            <span className="circle-num">178</span>
+                            <span className="circle-num">{leetStats.totalSolved}</span>
                             <span className="circle-sub">Solved</span>
                           </div>
                           <div className="leetcode-breakdown-bars">
                             <div className="bar-row">
                               <span className="bar-label easy">Easy</span>
-                              <div className="bar-track"><div className="bar-fill easy" style={{ width: '10.5%' }}></div></div>
-                              <span className="bar-val">102 / 968</span>
+                              <div className="bar-track">
+                                <div
+                                  className="bar-fill easy"
+                                  style={{ width: `${Math.min(100, (leetStats.easySolved / (leetStats.totalEasy || 969)) * 100).toFixed(1)}%` }}
+                                ></div>
+                              </div>
+                              <span className="bar-val">{leetStats.easySolved} / {leetStats.totalEasy || 969}</span>
                             </div>
                             <div className="bar-row">
                               <span className="bar-label medium">Medium</span>
-                              <div className="bar-track"><div className="bar-fill medium" style={{ width: '3.2%' }}></div></div>
-                              <span className="bar-val">68 / 2122</span>
+                              <div className="bar-track">
+                                <div
+                                  className="bar-fill medium"
+                                  style={{ width: `${Math.min(100, (leetStats.mediumSolved / (leetStats.totalMedium || 2124)) * 100).toFixed(1)}%` }}
+                                ></div>
+                              </div>
+                              <span className="bar-val">{leetStats.mediumSolved} / {leetStats.totalMedium || 2124}</span>
                             </div>
                             <div className="bar-row">
                               <span className="bar-label hard">Hard</span>
-                              <div className="bar-track"><div className="bar-fill hard" style={{ width: '0.8%' }}></div></div>
-                              <span className="bar-val">8 / 979</span>
+                              <div className="bar-track">
+                                <div
+                                  className="bar-fill hard"
+                                  style={{ width: `${Math.min(100, (leetStats.hardSolved / (leetStats.totalHard || 980)) * 100).toFixed(1)}%` }}
+                                ></div>
+                              </div>
+                              <span className="bar-val">{leetStats.hardSolved} / {leetStats.totalHard || 980}</span>
                             </div>
                           </div>
                         </div>
@@ -981,14 +1252,33 @@ function App() {
           </div>
 
           <div className="timeline">
-            <article className="timeline-item">
+            <article className="timeline-item is-current">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
-                  <h3>evy.io</h3>
+                  <div className="timeline-title-wrap">
+                    <a
+                      href="https://evy.io/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="timeline-company-title-link"
+                      title="Visit evy.io"
+                    >
+                      <h3>evy.io</h3>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="timeline-external-icon">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <span className="live-status-badge">
+                      <span className="live-status-ping"></span>
+                      Current Role
+                    </span>
+                  </div>
                   <span className="pill">May 2026 – Present · Part-time · Florida, USA · Remote</span>
                 </div>
-                <p className="muted">Software Engineer, Machine Learning</p>
+                <p className="muted">Computer Vision Engineer · Machine Learning</p>
                 <ul className="bullets">
                   <li>
                     Build real-time eye tracking, iris detection, and blink detection for AI interview monitoring
@@ -1013,12 +1303,31 @@ function App() {
                     evaluation to the first production release.
                   </li>
                 </ul>
+                <div className="timeline-actions">
+                  <a
+                    href="https://evy.io/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="timeline-link-pill"
+                    aria-label="Visit evy.io website"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    Visit evy.io
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '2px', opacity: 0.8 }}>
+                      <path d="M7 17l9.2-9.2M17 17V8H8" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <article className="timeline-item">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
                   <h3>University of Florida</h3>
                   <span className="pill">Mar 2026 – May 2026 · Part-time · Florida, USA · On-site</span>
@@ -1047,7 +1356,7 @@ function App() {
 
             <article className="timeline-item">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
                   <h3>SouthEnd Psychiatry</h3>
                   <span className="pill">Sep 2024 – Aug 2025 · Contract · Bronx, NY · Remote</span>
@@ -1077,7 +1386,7 @@ function App() {
 
             <article className="timeline-item">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
                   <h3>ARC Document Solutions</h3>
                   <span className="pill">Jul 2022 – Sep 2024 · Full-time · Kolkata, India · On-site</span>
@@ -1137,7 +1446,7 @@ function App() {
 
             <article className="timeline-item">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
                   <h3>ARC Document Solutions</h3>
                   <span className="pill">Jan 2022 – Jun 2022 · Internship · Kolkata, India · On-site</span>
@@ -1154,7 +1463,7 @@ function App() {
 
             <article className="timeline-item">
               <div className="timeline-marker" />
-              <div className="timeline-card">
+              <div className="timeline-card" onMouseMove={handleCardMouseMove}>
                 <div className="timeline-top">
                   <h3>SCI-BI</h3>
                   <span className="pill">Jul 2021 – Dec 2021 · Internship · Chennai, India · Remote</span>
@@ -1990,78 +2299,97 @@ function App() {
         {/* Contact Section */}
         <section id="contact" className="contact" ref={contactRef}>
           <div className="contact-container">
-            <div className="contact-header-wrapper">
-              <h2>Let&apos;s build something</h2>
-              <p className="contact-subtitle">
-                I&apos;m open to software engineering roles, AI/ML research collaborations, and NLP‑focused
-                projects. If you&apos;re working on something interesting in iOS, AI systems, or language
-                technologies, I&apos;d love to chat.
-              </p>
-            </div>
-            <div className="contact-highlight">
-              <div className="contact-info">
-                <h3>Get in Touch</h3>
-                <p className="contact-location">
-                  <span className="contact-location-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  </span>
-                  Gainesville, FL, USA
+            <div className="contact-main-col">
+              <div className="contact-header-wrapper">
+                <span className="contact-kicker">LET&apos;S BUILD SOMETHING</span>
+                <h2>Contact Form</h2>
+                <p className="contact-subtitle">
+                  Email me directly at <a href="mailto:satyabratadas996@gmail.com" className="contact-email-inline">satyabratadas996@gmail.com</a> — or drop your info here and I&apos;ll come back to you.
                 </p>
-                <p className="contact-cta">Ready to collaborate? Reach out via:</p>
-                <div className="contact-links">
-                  <a href="mailto:satyabratadas996@gmail.com" className="contact-link-primary">
-                    <span className="contact-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                      </svg>
-                    </span>
-                    satyabratadas996@gmail.com
-                  </a>
-                  <a href="https://www.linkedin.com/in/satyabrata-lm10/" target="_blank" rel="noreferrer" className="contact-link">
-                    <span className="contact-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                    </span>
-                    LinkedIn
-                  </a>
-                  <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="contact-link">
-                    <span className="contact-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                    </span>
-                    GitHub
-                  </a>
-                  <a href="https://leetcode.com/u/Satyabratadas10/" target="_blank" rel="noreferrer" className="contact-link">
-                    <span className="contact-icon contact-icon-leetcode">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
-                      </svg>
-                    </span>
-                    LeetCode
-                  </a>
-                  <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="contact-link">
-                    <span className="contact-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M5.59 2.23a.81.81 0 0 1 .4-.1h2.1v14.33h-2.5V9.35H5.59a3.39 3.39 0 0 1 0-6.77zm2.5 4.02h2.27a2.15 2.15 0 1 0 0-4.3H8.09v4.3zm10.32-4.12l-2.47 4.95 2.47 4.94h-2.97l-1.5-3.09-1.48 3.09h-2.97l2.47-4.94-2.47-4.95h2.97l1.48 3.08 1.5-3.08h2.97z"/>
-                      </svg>
-                    </span>
-                    Kaggle
-                  </a>
-                  <a href="https://devpost.com/satyabratadas996?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noreferrer" className="contact-link">
-                    <span className="contact-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="16 18 22 12 16 6"/>
-                        <polyline points="8 6 2 12 8 18"/>
-                      </svg>
-                    </span>
-                    Devpost
-                  </a>
+              </div>
+
+              <div className="contact-card info-card">
+                {formSent ? (
+                  <div className="form-success-message">
+                    <span className="success-icon">🎉</span>
+                    <h3>Thank you for reaching out!</h3>
+                    <p>Your default email client opened to send the message. You can also connect with me directly on LinkedIn or email.</p>
+                    <button type="button" className="btn btn-primary" onClick={() => setFormSent(false)}>
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form className="contact-form" onSubmit={handleFormSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="contact-name">Full name</label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        placeholder="Ada Lovelace"
+                        value={formState.name}
+                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="contact-email">Email Address</label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        placeholder="ada@example.com"
+                        value={formState.email}
+                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="contact-message">Your Message</label>
+                      <textarea
+                        id="contact-message"
+                        rows="4"
+                        placeholder="Hi Satyabrata, I'd love to discuss an AI/ML opportunity or project..."
+                        value={formState.message}
+                        onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <p className="form-disclaimer">
+                      I&apos;ll never share your data with anyone else. Pinky promise!
+                    </p>
+                    <button type="submit" className="btn btn-primary contact-submit-btn">
+                      Send Message
+                    </button>
+                  </form>
+                )}
+
+                <div className="contact-direct-channels">
+                  <span className="channels-title">Or reach out directly:</span>
+                  <div className="channels-list">
+                    <a href="mailto:satyabratadas996@gmail.com" className="channel-pill" title="Email Satyabrata">
+                      <span className="channel-icon">✉️</span> satyabratadas996@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/satyabrata-lm10/" target="_blank" rel="noreferrer" className="channel-pill" title="LinkedIn">
+                      <span className="channel-icon">💼</span> LinkedIn
+                    </a>
+                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="channel-pill" title="GitHub">
+                      <span className="channel-icon">🐙</span> GitHub
+                    </a>
+                    <a href="https://leetcode.com/u/Satyabratadas10/" target="_blank" rel="noreferrer" className="channel-pill" title="LeetCode">
+                      <span className="channel-icon">⚡</span> LeetCode
+                    </a>
+                    <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="channel-pill" title="Kaggle">
+                      <span className="channel-icon">📊</span> Kaggle
+                    </a>
+                    <a href="https://devpost.com/satyabratadas996?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noreferrer" className="channel-pill" title="Devpost">
+                      <span className="channel-icon">🏆</span> Devpost
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Right side: 3D interactive stage spacer so keyboard is fully visible without overlap */}
+            <div className="contact-3d-stage" aria-hidden="true" />
           </div>
         </section>
       </main>
@@ -2070,6 +2398,7 @@ function App() {
         <span>© {new Date().getFullYear()} Satyabrata Das</span>
       </footer>
     </div>
+    </>
   )
 }
 
