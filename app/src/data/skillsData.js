@@ -201,7 +201,7 @@ export const SKILLS_DICT = {
     name: 'aws',
     keyTrigger: 'a',
     physicalKey: 'aws',
-    label: 'AWS (EC2, S3, Lambda)',
+    label: 'AWS',
     category: 'Cloud & Databases',
     shortDescription: 'EC2 GPU instances for deep learning, S3 model weights storage, and serverless Lambda functions.',
     color: '#ff9900',
@@ -613,7 +613,7 @@ export const TECH_STACK_CATEGORIES = [
   {
     title: 'Cloud & Databases',
     skills: [
-      { name: 'aws', label: 'AWS (EC2, S3, Lambda)' },
+      { name: 'aws', label: 'AWS' },
       { name: 'gcp', label: 'GCP' },
       { name: 'snowflake', label: 'Snowflake' },
       { name: 'tigerdata', label: 'Tiger Data' },

@@ -1497,11 +1497,110 @@ function App() {
           <div className="section-header">
             <h2>Hackathons</h2>
             <p className="section-subtitle">
-              Recent ML/CV and data-focused hackathons where I shipped under tight deadlines.
+              Recent quant, ML/CV, and data-focused hackathons where I shipped under tight deadlines.
             </p>
           </div>
 
           <div className="cards-grid">
+            <article className="info-card">
+              <div className="info-card-top">
+                <div className="project-card-title-row">
+                  <h3>Gator Quant Hacks 2026 — Backfill</h3>
+                  <div className="project-card-actions">
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://devpost.com/software/backfill-1kpq2o"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Backfill on Devpost"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on Devpost</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/AIForge10/BackFill"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Backfill on GitHub"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on GitHub</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://155-138-224-207.sslip.io/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Backfill Live App"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View Live App</span>
+                    </div>
+                  </div>
+                </div>
+                <span className="pill">🏆 Solana Track · Winner</span>
+              </div>
+              <p className="muted">Gator Quant Club @ University of Florida · Gainesville, FL</p>
+              <ul className="bullets">
+                <li>
+                  Engineered Backfill, a quant backtesting pipeline analyzing whether pharmaceutical suppliers outperform during FDA drug shortages, reconstructing historical point-in-time notices from Internet Archive snapshots back to 2014 to eliminate lookahead and survivorship bias.
+                </li>
+                <li>
+                  Architected an on-chain auditability layer on Solana: froze strategy rules, transaction cost models, and dataset fingerprints into SHA-256 hashes written as on-chain memos, enabling single-command cryptographic verification of backtest integrity against tampering.
+                </li>
+              </ul>
+            </article>
+
             <article className="info-card">
               <div className="info-card-top">
                 <div className="project-card-title-row">
