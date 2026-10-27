@@ -1497,11 +1497,85 @@ function App() {
           <div className="section-header">
             <h2>Hackathons</h2>
             <p className="section-subtitle">
-              Recent quant, ML/CV, and data-focused hackathons where I shipped under tight deadlines.
+              Recent XR, quant, ML/CV, and data-focused hackathons where I shipped under tight deadlines.
             </p>
           </div>
 
           <div className="cards-grid">
+            <article className="info-card">
+              <div className="info-card-top">
+                <div className="project-card-title-row">
+                  <h3>Gator Hack V — Albie</h3>
+                  <div className="project-card-actions">
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://devpost.com/software/albie"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Albie on Devpost"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M12 16v-4M12 8h.01" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on Devpost</span>
+                    </div>
+                    <div className="project-info-with-tooltip">
+                      <a
+                        href="https://github.com/builtbyd3v/Albie"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-info-icon"
+                        aria-label="View Albie on GitHub"
+                        onClick={(e) => e.currentTarget.blur()}
+                        onMouseLeave={(e) => e.currentTarget.blur()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                      <span className="project-tooltip">View on GitHub</span>
+                    </div>
+                  </div>
+                </div>
+                <span className="pill">🏆 1st Place Overall &amp; Best Open Source (MLH) · Winner</span>
+              </div>
+              <p className="muted">University of Florida &amp; MLH · Gainesville, FL</p>
+              <ul className="bullets">
+                <li>
+                  Built a Meta Quest mixed-reality workspace (Unity 6, Meta XR SDK, MRUK) that anchors to the user&apos;s desk, streams live VS Code over WebRTC, and lets an AI agent edit CAD, train models, and draft messages by voice.
+                </li>
+                <li>
+                  Orchestrated Grok Voice with Claude Agent SDK delegation through a FastAPI/WebSocket hub sharing 60 tools, plus 9 parallel agents in isolated git worktrees with human-approved diffs.
+                </li>
+                <li>
+                  Automated ML repo onboarding with confidence-scored classification and verified adapter generation, boosting a CIFAR-10 model from 60.6% to 82% accuracy by voice alone.
+                </li>
+              </ul>
+            </article>
+
             <article className="info-card">
               <div className="info-card-top">
                 <div className="project-card-title-row">
