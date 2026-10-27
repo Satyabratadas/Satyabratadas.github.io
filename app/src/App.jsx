@@ -1,7 +1,30 @@
 import { useEffect, useRef, useState } from 'react'
 import anime from 'animejs'
 import AsciiRipple from './components/AsciiRipple'
-import AuroraBackground from './components/AuroraBackground'
+import AmbientBackground from './components/AmbientBackground'
+import StackFieldBackdrop from './components/StackFieldBackdrop'
+import SectionHeader from './components/SectionHeader'
+import DevAvatar from './components/DevAvatar'
+import SmoothScroll from './components/SmoothScroll'
+import IntroSplash from './components/IntroSplash'
+import ScrollProgress from './components/ScrollProgress'
+import NavBar from './components/NavBar'
+import HeroTagline from './components/HeroTagline'
+import ProximityText from './components/ProximityText'
+import HighlightCard from './components/HighlightCard'
+import QuickFacts from './components/QuickFacts'
+import EducationSection from './components/EducationSection'
+import {
+  ArrowDownRight,
+  FileText,
+  Download,
+  Briefcase,
+  GraduationCap,
+  Trophy,
+  Cpu,
+  Terminal,
+  ExternalLink,
+} from 'lucide-react'
 import { SKILL_LIST, TECH_STACK_CATEGORIES, SKILLS_DICT } from './data/skillsData'
 import './App.css'
 
@@ -743,167 +766,210 @@ function App() {
   }, [])
 
   return (
-    <>
-      {/* Aurora Ambient Mesh & Perspective Grid */}
-      <AuroraBackground />
+    <SmoothScroll>
+      {/* Sagar Gupta Signature Intro Splash Curtain */}
+      <IntroSplash />
+      {/* Reading Progress Line */}
+      <ScrollProgress />
+      {/* Sagar Gupta Minimalist Ambient Background & Lateral Floating Rails */}
+      <AmbientBackground />
+      <StackFieldBackdrop />
 
       <div className="portfolio">
-        <header className="portfolio-header" ref={headerRef}>
-          <div className="logo">Satyabrata</div>
-          <nav className={`nav ${isNavOpen ? 'nav-open' : ''}`}>
-            <a href="#home" onClick={() => setIsNavOpen(false)}>Home</a>
-            <a href="#about" onClick={() => setIsNavOpen(false)}>About</a>
-            <a href="#education" onClick={() => setIsNavOpen(false)}>Education</a>
-            <a href="#skills" onClick={() => setIsNavOpen(false)}>Skills</a>
-            <a href="#experience" onClick={() => setIsNavOpen(false)}>Experience</a>
-            <a href="#hackathons" onClick={() => setIsNavOpen(false)}>Hackathons</a>
-            <a href="#projects" onClick={() => setIsNavOpen(false)}>Projects</a>
-            <a href="#contact" onClick={() => setIsNavOpen(false)}>Contact</a>
-          </nav>
-          <div className="header-actions">
-            <button
-              className={`nav-menu ${isNavOpen ? 'nav-menu-open' : ''}`}
-              aria-label="Toggle navigation menu"
-              aria-expanded={isNavOpen}
-              onClick={() => setIsNavOpen((open) => !open)}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-          </div>
-        </header>
+        {/* Sagar Gupta Fixed Full-Width Navigation Bar */}
+        <NavBar isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
 
         <main>
-          {/* Hero Section */}
-          <section id="home" className="hero" ref={heroRef}>
-            <div className="hero-text">
-              <p className="hero-eyebrow">Hi, I am</p>
-              <h1 className="hero-name-heading">Satyabrata Das</h1>
-              <p className="hero-subtitle-tagline">
-                Computer Vision &amp; Machine Learning Engineer building AI systems that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
-              </p>
-              
-              <ul className="hero-credentials-list">
-                <li>
-                  <span className="hero-cred-role">Computer Vision Engineer</span>
-                  <span className="hero-cred-sep">/</span>
-                  <span className="hero-cred-org">evy.io</span>
-                </li>
-                <li>
-                  <span className="hero-cred-role">Machine Learning Research Assistant</span>
-                  <span className="hero-cred-sep">/</span>
-                  <span className="hero-cred-org">University of Florida</span>
-                </li>
-                <li>
-                  <span className="hero-cred-role">Software Engineer</span>
-                  <span className="hero-cred-sep">/</span>
-                  <span className="hero-cred-org">ARC Document Solutions</span>
-                </li>
-              </ul>
+          {/* Sagar Gupta Centered Hero Section */}
+          <section id="home" className="sagar-hero-section" ref={heroRef}>
+            {/* Top Terminal Icon Box */}
+            <div
+              style={{
+                width: 52,
+                height: 52,
+                borderRadius: 14,
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.22)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#38bdf8',
+                marginBottom: '16px',
+                boxShadow: '0 8px 24px rgba(56, 189, 248, 0.12)',
+              }}
+            >
+              <Terminal size={24} />
+            </div>
 
-              <div className="hero-announcement-pill">
-                <span className="pill-emoji">👋</span>
-                <span>Available for Machine Learning &amp; Systems roles — <a href="mailto:satyabratadas996@gmail.com" className="pill-link">satyabratadas996@gmail.com</a></span>
+            <div className="sagar-status-pill">
+              <span className="sagar-pulse-dot" />
+              <span>Available for Machine Learning &amp; Systems roles</span>
+            </div>
+
+            {/* Cycling Hero Tagline with word-by-word reveal */}
+            <HeroTagline />
+
+            {/* Dynamic Proximity Font-Weight Headline */}
+            <h1 className="sagar-hero-headline">
+              Hi, I&apos;m <span className="font-signature">Satyabrata Das</span>.{' '}
+              <ProximityText text="I build real-time AI platforms that scale." accentWord="real-time" />
+            </h1>
+
+            <p className="sagar-hero-subtitle">
+              Computer Vision &amp; Machine Learning Engineer building vision models, multimodal pipelines, and high-throughput microservices that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
+            </p>
+
+            <div className="sagar-hero-creds-strip">
+              <div className="sagar-cred-item">
+                <span className="sagar-cred-role">Computer Vision Engineer</span>
+                <span style={{ color: '#64748b' }}>/</span>
+                <span className="sagar-cred-org">evy.io</span>
               </div>
-
-              <div className="hero-actions">
-                <a
-                  className="btn btn-primary"
-                  href="/Satyabrata_Software_engineer_resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="btn-icon">📄</span>
-                  <span>Résumé</span>
-                </a>
-                <a
-                  className="btn btn-outline"
-                  href="mailto:satyabratadas996@gmail.com?subject=Project%20or%20Opportunity%20Inquiry"
-                >
-                  <span className="btn-icon">✉️</span>
-                  <span>Get in touch</span>
-                </a>
+              <div className="sagar-cred-item">
+                <span className="sagar-cred-role">ML Research Assistant</span>
+                <span style={{ color: '#64748b' }}>/</span>
+                <span className="sagar-cred-org">University of Florida</span>
               </div>
-
-              <div className="hero-social-row">
-                <a
-                  href="https://github.com/Satyabratadas"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hero-social-btn"
-                  aria-label="GitHub Profile"
-                  title="GitHub"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/satyabrata-lm10/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hero-social-btn"
-                  aria-label="LinkedIn Profile"
-                  title="LinkedIn"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-                <a
-                  href="mailto:satyabratadas996@gmail.com"
-                  className="hero-social-btn"
-                  aria-label="Email Satyabrata"
-                  title="Email"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </a>
+              <div className="sagar-cred-item">
+                <span className="sagar-cred-role">Software Engineer</span>
+                <span style={{ color: '#64748b' }}>/</span>
+                <span className="sagar-cred-org">ARC Document Solutions</span>
               </div>
             </div>
 
-            {/* Right side: Profile picture anchored from the bottom */}
-            <div className="hero-portrait-wrapper" role="region" aria-label="Satyabrata Das profile photo">
-              <div className="hero-portrait-ambient-glow" aria-hidden="true" />
-              <div className="hero-portrait-frame">
-                <img
-                  src="/profile_pic.jpeg"
-                  alt="Portrait of Satyabrata Das"
-                  className="hero-portrait-img"
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </div>
+            <a
+              href="#hackathons"
+              className="sagar-latest-ticker"
+              title="View recent hackathon wins"
+            >
+              <span className="sagar-latest-badge">LATEST</span>
+              <span>🏆 1st Place at Gator Hack V (Albie, 82% voice accuracy) &amp; Solana Track Winner at Gator Quant Hacks 2026 (Backfill) ↗</span>
+            </a>
+
+            <div className="sagar-hero-actions">
+              <a className="sagar-btn-primary" href="#projects">
+                <span>Explore Projects</span>
+                <ArrowDownRight size={18} />
+              </a>
+              <a
+                className="sagar-btn-outline"
+                href="/Satyabrata_Software_engineer_resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Read CV</span>
+                <FileText size={16} />
+              </a>
+              <a
+                className="sagar-btn-outline"
+                href="/Satyabrata_Software_engineer_resume.pdf"
+                download="Satyabrata_Das_Resume.pdf"
+              >
+                <span>Download CV</span>
+                <Download size={16} />
+              </a>
+              <a className="sagar-btn-outline" href="#contact">
+                <span>Contact</span>
+                <ExternalLink size={16} />
+              </a>
             </div>
 
-            <a className="scroll-cue" href="#about" aria-label="Scroll to About">
-              <span />
+            <div className="sagar-social-row">
+              <a
+                href="https://github.com/Satyabratadas"
+                target="_blank"
+                rel="noreferrer"
+                className="sagar-social-tile"
+                aria-label="GitHub Profile"
+                title="GitHub"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/satyabrata-lm10/"
+                target="_blank"
+                rel="noreferrer"
+                className="sagar-social-tile"
+                aria-label="LinkedIn Profile"
+                title="LinkedIn"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a
+                href="https://leetcode.com/u/Satyabratadas10/"
+                target="_blank"
+                rel="noreferrer"
+                className="sagar-social-tile"
+                aria-label="LeetCode Profile"
+                title="LeetCode"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                </svg>
+              </a>
+              <a
+                href="mailto:satyabratadas996@gmail.com"
+                className="sagar-social-tile"
+                aria-label="Email Satyabrata"
+                title="Email"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+
+            {/* Sagar Mouse Scroll Hint */}
+            <a
+              href="#about"
+              className="sagar-mouse-scroll"
+              aria-label="Scroll to About"
+            >
+              <div className="sagar-mouse-shape">
+                <div className="sagar-mouse-wheel animate-scroll-hint" />
+              </div>
+              <span className="sagar-mouse-label">SCROLL</span>
             </a>
           </section>
 
-          {/* About / Services Section */}
+          {/* About Section with Sagar Gupta 01 / Header, Orbital DevAvatar & Highlight Cards */}
           <section id="about" className="about" ref={aboutRef}>
-            <div className="about-grid">
-              <div className="about-services">
-                <div className="service">
-                  <div className="service-icon">👁️</div>
-                  <div className="service-content">
-                    <h3>Computer Vision &amp; Gaze</h3>
-                    <p>Real-time iris/pupil tracking, gaze estimation, and blink anomaly detection across edge webcam hardware.</p>
+            <SectionHeader
+              number="01"
+              eyebrow="Computer Vision & Machine Learning Engineer"
+              title="About"
+              accentWord="me"
+              sectionId="about"
+            />
+
+            <div className="sagar-about-grid">
+              {/* Left Column: Orbital DevAvatar & Core Skills */}
+              <div className="sagar-about-left">
+                <DevAvatar />
+
+                <div className="about-services" style={{ width: '100%' }}>
+                  <div className="service">
+                    <div className="service-icon">👁️</div>
+                    <div className="service-content">
+                      <h3>Computer Vision &amp; Gaze</h3>
+                      <p>Real-time iris/pupil tracking, gaze estimation, and blink anomaly detection across edge webcam hardware.</p>
+                    </div>
                   </div>
-                </div>
-                <div className="service">
-                  <div className="service-icon">⚡</div>
-                  <div className="service-content">
-                    <h3>Production ML &amp; MLOps</h3>
-                    <p>PyTorch pipelines, sub-1.4s model serving, Dockerized FastAPI backends, and Prometheus/Grafana telemetry.</p>
+                  <div className="service">
+                    <div className="service-icon">⚡</div>
+                    <div className="service-content">
+                      <h3>Production ML &amp; MLOps</h3>
+                      <p>PyTorch pipelines, sub-1.4s model serving, Dockerized FastAPI backends, and Prometheus/Grafana telemetry.</p>
+                    </div>
                   </div>
-                </div>
-                <div className="service">
-                  <div className="service-icon">🌐</div>
-                  <div className="service-content">
-                    <h3>Scalable Real-Time Systems</h3>
-                    <p>WebSocket sync for 20,000+ active users, 10M+ records/day ETL pipelines, and resilient distributed architecture.</p>
+                  <div className="service">
+                    <div className="service-icon">🌐</div>
+                    <div className="service-content">
+                      <h3>Scalable Real-Time Systems</h3>
+                      <p>WebSocket sync for 20,000+ active users, 10M+ records/day ETL pipelines, and resilient distributed architecture.</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="about-skills-block">
+                <div className="about-skills-block" style={{ width: '100%' }}>
                   <span className="about-skills-title">Core Skills</span>
                   <div className="about-skills-chips">
                     {[
@@ -936,80 +1002,94 @@ function App() {
                 </div>
               </div>
 
-              <div className="about-content">
-                <h2>About me</h2>
-                <div className="about-lead-quote">
-                  <p className="about-lead-text">
-                    Computer Vision &amp; Machine Learning Engineer building AI systems that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
-                  </p>
+              {/* Right Column: 4 Highlight Cards + Narrative Bio + Production Stats */}
+              <div className="sagar-about-right">
+                {/* Sagar Gupta Style Highlight Cards with colored left borders */}
+                <div className="sagar-highlight-card-grid">
+                  <HighlightCard
+                    icon={Briefcase}
+                    color="#3b82f6"
+                    title="Current Role"
+                    body={
+                      <>
+                        Computer Vision Engineer at <strong>evy.io</strong>, building real-time gaze estimation, iris tracking, and behavioral anomaly models sustaining <strong>40+ FPS</strong>.
+                      </>
+                    }
+                  />
+                  <HighlightCard
+                    icon={GraduationCap}
+                    color="#06b6d4"
+                    title="Academic Background"
+                    body={
+                      <>
+                        M.S. in AI Systems at <strong>University of Florida</strong> (Gainesville, FL). Focus on AI safety, applied deep learning, and robust computer vision systems.
+                      </>
+                    }
+                  />
+                  <HighlightCard
+                    icon={Cpu}
+                    color="#10b981"
+                    title="Production Scale"
+                    body={
+                      <>
+                        Engineered WebSocket sync for <strong>20,000+ MAU</strong> and high-throughput ETL processing <strong>10M+ daily records</strong> at ARC Document Solutions &amp; SCI-BI.
+                      </>
+                    }
+                  />
+                  <HighlightCard
+                    icon={Trophy}
+                    color="#f59e0b"
+                    title="Hackathons &amp; Problem Solving"
+                    body={
+                      <>
+                        <strong>1st Place</strong> at Gator Hack V (Albie), <strong>Winner</strong> Solana Track (Backfill), <strong>Winner</strong> NASA GeoEMERGE Hackathon, and <strong>183+</strong> LeetCode problems solved.
+                      </>
+                    }
+                  />
                 </div>
 
-                <p>
-                  I&apos;m completing my M.S. in AI Systems at the University of Florida while working as a Computer Vision Engineer at Evy, where I build real-time eye tracking and behavioral analysis for AI-powered interview monitoring. My work covers MediaPipe Iris-based iris and pupil tracking, gaze estimation, blink detection, and behavioral anomaly detection — running in real time across varied lighting conditions, webcam hardware, and user environments.
-                </p>
-                <p>
-                  Before moving into AI, I spent 2+ years as a Software Engineer at ARC Document Solutions. There I engineered a real-time WebSocket sync layer for a product with 20,000+ monthly active users, reduced collaboration latency by 25%, integrated five payment gateways to cut failed transactions by 15%, and shipped iOS features that lifted order conversion by 10%. Earlier, I built Python and SSIS ETL pipelines processing 10M+ records per day at 99%+ accuracy, eliminating 20 hours of manual operations per week.
-                </p>
-                {/* <p>
-                  That production background shapes how I build ML: I care as much about latency, monitoring, and deployment as about model accuracy. Two recent projects reflect that — <a href="#hackathons" className="about-inline-link">JuggleIQ</a>, a YOLO and MediaPipe soccer analytics pipeline generating 1,000+ frame-level inferences per session, and <a href="#projects" className="about-inline-link">SummarIQ</a>, a T5/BART research-paper summarizer serving predictions at under 1.4s average latency with Prometheus and Grafana instrumentation.
-                </p> */}
+                <div className="about-content" style={{ padding: 0 }}>
+                  <div className="about-lead-quote">
+                    <p className="about-lead-text">
+                      Computer Vision &amp; Machine Learning Engineer building AI systems that hold up outside the notebook — in real time, on real users, in messy real-world conditions.
+                    </p>
+                  </div>
 
-                <div className="about-stats">
-                  <div className="stat">
-                    <span className="stat-number">20,000+</span>
-                    <span className="stat-label">Monthly active users supported</span>
+                  <p>
+                    I&apos;m completing my M.S. in AI Systems at the University of Florida while working as a Computer Vision Engineer at Evy, where I build real-time eye tracking and behavioral analysis for AI-powered interview monitoring. My work covers MediaPipe Iris-based iris and pupil tracking, gaze estimation, blink detection, and behavioral anomaly detection — running in real time across varied lighting conditions, webcam hardware, and user environments.
+                  </p>
+                  <p>
+                    Before moving into AI, I spent 2+ years as a Software Engineer at ARC Document Solutions. There I engineered a real-time WebSocket sync layer for a product with 20,000+ monthly active users, reduced collaboration latency by 25%, integrated five payment gateways to cut failed transactions by 15%, and shipped iOS features that lifted order conversion by 10%. Earlier, I built Python and SSIS ETL pipelines processing 10M+ records per day at 99%+ accuracy, eliminating 20 hours of manual operations per week.
+                  </p>
+
+                  <div className="about-stats">
+                    <div className="stat">
+                      <span className="stat-number">20,000+</span>
+                      <span className="stat-label">Monthly active users supported</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-number">10M+</span>
+                      <span className="stat-label">Daily records processed (ETL)</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-number">25%</span>
+                      <span className="stat-label">Collaboration latency reduced</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-number">2+</span>
+                      <span className="stat-label">Years production engineering</span>
+                    </div>
                   </div>
-                  <div className="stat">
-                    <span className="stat-number">10M+</span>
-                    <span className="stat-label">Daily records processed (ETL)</span>
-                  </div>
-                  <div className="stat">
-                    <span className="stat-number">25%</span>
-                    <span className="stat-label">Collaboration latency reduced</span>
-                  </div>
-                  <div className="stat">
-                    <span className="stat-number">2+</span>
-                    <span className="stat-label">Years production engineering</span>
-                  </div>
+
+                  {/* Sagar Quick Facts Grid */}
+                  <QuickFacts />
                 </div>
               </div>
             </div>
           </section>
 
-        {/* Education Section */}
-        <section id="education" className="section" ref={educationRef}>
-          <div className="section-header">
-            <h2>Education</h2>
-            <p className="section-subtitle">
-              Currently focused on AI systems, robustness, and applied deep learning.
-            </p>
-          </div>
-
-          <div className="cards-grid">
-            <article className="info-card">
-              <div className="info-card-top">
-                <h3>University of Florida</h3>
-                <span className="pill">Aug 2025 – May 2027 </span>
-              </div>
-              <p className="muted">M.S. in Artificial Intelligence Systems · Gainesville, FL</p>
-              <ul className="bullets">
-                <li>AI Safety &amp; Robustness, AI Systems, Machine Learning for AI</li>
-                <li>Image Processing &amp; Computer Vision, Applied Deep Learning</li>
-              </ul>
-            </article>
-
-            <article className="info-card">
-              <div className="info-card-top">
-                <h3>Guru Nanak Institute of Technology (MAKUT)</h3>
-                <span className="pill">Aug 2018 – Jun 2022</span>
-              </div>
-              <p className="muted">B.Tech in Computer Science · India · CGPA: 8.64 / 10</p>
-              <ul className="bullets">
-                <li>Core CS foundations: Data Structures, Algorithms, OOP, Git</li>
-              </ul>
-            </article>
-          </div>
-        </section>
+        {/* Education Section with Sitting Mascot Avatar on Header Rule & Sagar Timeline Cards */}
+        <EducationSection educationRef={educationRef} />
 
         {/* Academic Presentation Section */}
         <section id="presentation" className="section" ref={presentationRef}>
@@ -1037,10 +1117,13 @@ function App() {
 
         {/* Skills Section */}
         <section id="skills" className="section" ref={skillsRef}>
-          <div className="section-header">
-            <h2>Tech Stack</h2>
-            <p className="section-subtitle">Core languages, backend architectures, cloud databases &amp; machine learning</p>
-          </div>
+          <SectionHeader
+            number="04"
+            eyebrow="Skills & Technologies"
+            title="Technical"
+            accentWord="arsenal"
+            sectionId="skills"
+          />
 
           {/* Interactive Skill Spotlight */}
           {SKILLS_DICT[activeSkillName] && (
@@ -1244,12 +1327,13 @@ function App() {
 
         {/* Experience Section */}
         <section id="experience" className="section" ref={experienceRef}>
-          <div className="section-header">
-            <h2>Work experience</h2>
-            <p className="section-subtitle">
-              Computer vision, ML research, full-stack engineering, and production systems experience.
-            </p>
-          </div>
+          <SectionHeader
+            number="03"
+            eyebrow="Work History"
+            title="Where I've"
+            accentWord="worked"
+            sectionId="experience"
+          />
 
           <div className="timeline">
             <article className="timeline-item is-current">
@@ -1494,12 +1578,13 @@ function App() {
 
         {/* Hackathons Section */}
         <section id="hackathons" className="section" ref={hackathonsRef}>
-          <div className="section-header">
-            <h2>Hackathons</h2>
-            <p className="section-subtitle">
-              Recent XR, quant, ML/CV, and data-focused hackathons where I shipped under tight deadlines.
-            </p>
-          </div>
+          <SectionHeader
+            number="05"
+            eyebrow="Competitions & Hackathons"
+            title="Podium"
+            accentWord="finishes"
+            sectionId="hackathons"
+          />
 
           <div className="cards-grid">
             <article className="info-card">
@@ -1924,8 +2009,14 @@ function App() {
 
         {/* Projects Section */}
         <section id="projects" className="projects" ref={projectsRef}>
-          <h2>Projects</h2>
-            <div className="projects-grid">
+          <SectionHeader
+            number="06"
+            eyebrow="Featured Work"
+            title="Projects I've"
+            accentWord="built"
+            sectionId="projects"
+          />
+          <div className="projects-grid">
               {/* <article className="project-card">
                 <div className="project-card-image">
                   <div className="project-card-frame">
@@ -2469,109 +2560,177 @@ function App() {
             </div>
         </section>
 
-        {/* Contact Section */}
+        {/* Contact Section with Sagar Gupta 2-Column Reachout & Message Form */}
         <section id="contact" className="contact" ref={contactRef}>
-          <div className="contact-container">
-            <div className="contact-main-col">
-              <div className="contact-header-wrapper">
-                <span className="contact-kicker">LET&apos;S BUILD SOMETHING</span>
-                <h2>Contact Form</h2>
-                <p className="contact-subtitle">
-                  Email me directly at <a href="mailto:satyabratadas996@gmail.com" className="contact-email-inline">satyabratadas996@gmail.com</a> — or drop your info here and I&apos;ll come back to you.
-                </p>
+          <SectionHeader
+            number="07"
+            eyebrow="Get in Touch"
+            title="Let's create something"
+            accentWord="extraordinary"
+            sectionId="contact"
+          />
+
+          <div className="sagar-contact-grid">
+            {/* Left Column: Direct Reachout Cards with colored left borders */}
+            <div className="sagar-contact-reachout-cards">
+              <p style={{ color: '#94a3b8', fontSize: '0.96rem', lineHeight: '1.6', margin: '0 0 8px' }}>
+                Whether you have an opportunity in computer vision, real-time ML systems, or just want to connect, my inbox is always open.
+              </p>
+
+              <a
+                href="mailto:satyabratadas996@gmail.com"
+                className="sagar-contact-card contact-card-blue"
+                title="Email Satyabrata"
+              >
+                <div className="sagar-contact-card-icon">✉️</div>
+                <div className="sagar-contact-card-info">
+                  <span className="sagar-contact-card-label">Email</span>
+                  <span className="sagar-contact-card-val">satyabratadas996@gmail.com</span>
+                </div>
+                <span className="sagar-contact-card-arrow">↗</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/satyabrata-lm10/"
+                target="_blank"
+                rel="noreferrer"
+                className="sagar-contact-card contact-card-cyan"
+                title="LinkedIn Profile"
+              >
+                <div className="sagar-contact-card-icon">💼</div>
+                <div className="sagar-contact-card-info">
+                  <span className="sagar-contact-card-label">LinkedIn</span>
+                  <span className="sagar-contact-card-val">linkedin.com/in/satyabrata-lm10</span>
+                </div>
+                <span className="sagar-contact-card-arrow">↗</span>
+              </a>
+
+              <a
+                href="https://github.com/Satyabratadas"
+                target="_blank"
+                rel="noreferrer"
+                className="sagar-contact-card contact-card-green"
+                title="GitHub Profile"
+              >
+                <div className="sagar-contact-card-icon">🐙</div>
+                <div className="sagar-contact-card-info">
+                  <span className="sagar-contact-card-label">GitHub</span>
+                  <span className="sagar-contact-card-val">github.com/Satyabratadas</span>
+                </div>
+                <span className="sagar-contact-card-arrow">↗</span>
+              </a>
+
+              <div className="sagar-contact-card contact-card-amber" style={{ cursor: 'default' }}>
+                <div className="sagar-contact-card-icon">📍</div>
+                <div className="sagar-contact-card-info">
+                  <span className="sagar-contact-card-label">Location</span>
+                  <span className="sagar-contact-card-val">Gainesville, Florida, USA (Open to Relocate)</span>
+                </div>
               </div>
 
-              <div className="contact-card info-card">
-                {formSent ? (
-                  <div className="form-success-message">
-                    <span className="success-icon">🎉</span>
-                    <h3>Thank you for reaching out!</h3>
-                    <p>Your default email client opened to send the message. You can also connect with me directly on LinkedIn or email.</p>
-                    <button type="button" className="btn btn-primary" onClick={() => setFormSent(false)}>
-                      Send another message
-                    </button>
-                  </div>
-                ) : (
-                  <form className="contact-form" onSubmit={handleFormSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="contact-name">Full name</label>
-                      <input
-                        id="contact-name"
-                        type="text"
-                        placeholder="Ada Lovelace"
-                        value={formState.name}
-                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="contact-email">Email Address</label>
-                      <input
-                        id="contact-email"
-                        type="email"
-                        placeholder="ada@example.com"
-                        value={formState.email}
-                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="contact-message">Your Message</label>
-                      <textarea
-                        id="contact-message"
-                        rows="4"
-                        placeholder="Hi Satyabrata, I'd love to discuss an AI/ML opportunity or project..."
-                        value={formState.message}
-                        onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <p className="form-disclaimer">
-                      I&apos;ll never share your data with anyone else. Pinky promise!
-                    </p>
-                    <button type="submit" className="btn btn-primary contact-submit-btn">
-                      Send Message
-                    </button>
-                  </form>
-                )}
-
-                <div className="contact-direct-channels">
-                  <span className="channels-title">Or reach out directly:</span>
-                  <div className="channels-list">
-                    <a href="mailto:satyabratadas996@gmail.com" className="channel-pill" title="Email Satyabrata">
-                      <span className="channel-icon">✉️</span> satyabratadas996@gmail.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/satyabrata-lm10/" target="_blank" rel="noreferrer" className="channel-pill" title="LinkedIn">
-                      <span className="channel-icon">💼</span> LinkedIn
-                    </a>
-                    <a href="https://github.com/Satyabratadas" target="_blank" rel="noreferrer" className="channel-pill" title="GitHub">
-                      <span className="channel-icon">🐙</span> GitHub
-                    </a>
-                    <a href="https://leetcode.com/u/Satyabratadas10/" target="_blank" rel="noreferrer" className="channel-pill" title="LeetCode">
-                      <span className="channel-icon">⚡</span> LeetCode
-                    </a>
-                    <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="channel-pill" title="Kaggle">
-                      <span className="channel-icon">📊</span> Kaggle
-                    </a>
-                    <a href="https://devpost.com/satyabratadas996?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noreferrer" className="channel-pill" title="Devpost">
-                      <span className="channel-icon">🏆</span> Devpost
-                    </a>
-                  </div>
+              <div className="contact-direct-channels" style={{ marginTop: '12px', borderTop: 'none', paddingTop: 0 }}>
+                <span className="channels-title">Other Platforms:</span>
+                <div className="channels-list">
+                  <a href="https://leetcode.com/u/Satyabratadas10/" target="_blank" rel="noreferrer" className="channel-pill" title="LeetCode">
+                    <span className="channel-icon">⚡</span> LeetCode
+                  </a>
+                  <a href="https://www.kaggle.com/satyabratadas10" target="_blank" rel="noreferrer" className="channel-pill" title="Kaggle">
+                    <span className="channel-icon">📊</span> Kaggle
+                  </a>
+                  <a href="https://devpost.com/satyabratadas996?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noreferrer" className="channel-pill" title="Devpost">
+                    <span className="channel-icon">🏆</span> Devpost
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* Right side: 3D interactive stage spacer so keyboard is fully visible without overlap */}
-            <div className="contact-3d-stage" aria-hidden="true" />
+            {/* Right Column: Contact Message Form */}
+            <div className="contact-card info-card" style={{ margin: 0 }}>
+              {formSent ? (
+                <div className="form-success-message">
+                  <span className="success-icon">🎉</span>
+                  <h3>Thank you for reaching out!</h3>
+                  <p>Your default email client opened to send the message. You can also connect with me directly on LinkedIn or email.</p>
+                  <button type="button" className="sagar-btn-primary" onClick={() => setFormSent(false)}>
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form className="contact-form" onSubmit={handleFormSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="contact-name">Full name</label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      placeholder="Ada Lovelace"
+                      value={formState.name}
+                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="contact-email">Email Address</label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      placeholder="ada@example.com"
+                      value={formState.email}
+                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="contact-message">Your Message</label>
+                    <textarea
+                      id="contact-message"
+                      rows="4"
+                      placeholder="Hi Satyabrata, I'd love to discuss an AI/ML opportunity or project..."
+                      value={formState.message}
+                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <p className="form-disclaimer">
+                    I&apos;ll never share your data with anyone else.
+                  </p>
+                  <button type="submit" className="sagar-btn-primary contact-submit-btn" style={{ width: '100%', justifyContent: 'center' }}>
+                    Send Message ↗
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="portfolio-footer" ref={footerRef}>
-        <span>© {new Date().getFullYear()} Satyabrata Das</span>
+      {/* Sagar Gupta Style Minimalist Footer */}
+      <footer className="sagar-footer" ref={footerRef}>
+        <div>
+          Designed &amp; Developed by{' '}
+          <span className="sagar-footer-signature">Satyabrata Das</span>
+        </div>
+        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+          © {new Date().getFullYear()} Satyabrata Das. All rights reserved.
+        </div>
+        <a
+          href="#home"
+          style={{
+            marginTop: '8px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.78rem',
+            color: '#38bdf8',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+          }}
+        >
+          <span>Back to top</span>
+          <span>↑</span>
+        </a>
       </footer>
     </div>
-    </>
+    </SmoothScroll>
   )
 }
 

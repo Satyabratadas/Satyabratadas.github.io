@@ -1,30 +1,49 @@
-/* Layout & Aurora Typography (Dark Mode Default) */
+/* ==========================================================================
+   Sagar Gupta Minimalist Dark Theme Tokens (#0b1012, Bricolage, Instrument Serif)
+   ========================================================================== */
 :root,
 .dark {
-  --font-display: 'Unbounded', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-signature: 'Yellowtail', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  --background: #070b16;
+  --background: #0b1012;
   --foreground: #f8fafc;
-  --card-bg: rgba(15, 23, 42, 0.9);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  --card-bg: #0e1417;
+  --card-bg-elevated: #131a1e;
+  --card-border: #1d2529;
+  --card-border-hover: #2e3a40;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 
-  --aurora-base: linear-gradient(180deg, #070b16 0%, #0a1020 55%, #060912 100%);
-  --aurora-1: #3882f64d;
-  --aurora-2: #9333ea42;
-  --aurora-3: #10b98133;
-  --aurora-grid: #94a3b812;
-  --aurora-vignette: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 35%, #02040ad9 100%);
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-blue: #3b82f6;
+  --accent-light-blue: #60a5fa;
+  --accent-cyan: #06b6d4;
+  --accent-sky: #38bdf8;
+  --accent-green: #22c55e;
+  --accent-amber: #f59e0b;
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --aurora-base: #0b1012;
+  --aurora-1: rgba(37, 99, 235, 0.15);
+  --aurora-2: rgba(56, 189, 248, 0.08);
+  --aurora-3: rgba(34, 197, 94, 0.08);
 }
 
 body {
   font-family: var(--font-body);
   background: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
 }
 
-h1, h2, h3, .logo, .font-display, .hero-title-inline, .section-header h2, .hero-name-heading {
+h1, h2, h3, .logo, .font-display, .hero-title-inline, .section-header h2, .hero-name-heading, .sagar-display-heading {
   font-family: var(--font-display);
   color: var(--foreground);
 }
@@ -2433,9 +2452,8 @@ main {
 .contact {
   padding: 60px 0 80px;
   position: relative;
-  min-height: calc(100vh - 100px);
-  display: flex;
-  align-items: center;
+  display: block;
+  width: 100%;
 }
 
 .contact-container {
@@ -3076,4 +3094,1120 @@ main {
   }
 }
 
+
+
+
+/* ==========================================================================
+   Sagar Gupta Minimalist Theme Component Styles
+   ========================================================================== */
+
+.font-display {
+  font-family: var(--font-display) !important;
+}
+
+.font-serif,
+.accent-serif {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--accent-light-blue, #60a5fa) !important;
+  font-size: 1.12em !important;
+}
+
+.font-signature {
+  font-family: var(--font-signature) !important;
+  font-weight: 400 !important;
+  color: var(--accent-light-blue, #60a5fa) !important;
+  font-size: 1.18em !important;
+  letter-spacing: 0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+/* Floating Pill Navigation */
+.sagar-header {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 32px);
+  max-width: 880px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 8px 22px;
+  border-radius: 9999px;
+  background: rgba(14, 20, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.sagar-brand {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.sagar-brand-code {
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.sagar-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sagar-nav-link {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sagar-nav-link:hover {
+  color: #ffffff;
+}
+
+.sagar-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #0b1012 !important;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+}
+
+.sagar-nav-cta:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+}
+
+.sagar-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 6px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .sagar-nav-links {
+    display: none;
+  }
+  .sagar-menu-toggle {
+    display: flex;
+  }
+}
+
+/* Centered Hero Section */
+.sagar-hero-section {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 130px 20px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sagar-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #86efac;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.sagar-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: sagar-pulse 2s infinite;
+}
+
+.sagar-hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.sagar-hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  max-width: 840px;
+}
+
+.sagar-hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  max-width: 720px;
+  margin: 0 auto 20px;
+  font-weight: 400;
+}
+
+.sagar-hero-creds-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.sagar-cred-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #1d2529;
+}
+
+.sagar-cred-role {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.sagar-cred-org {
+  color: #38bdf8;
+}
+
+.sagar-latest-ticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 760px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(14, 20, 23, 0.9);
+  border: 1px solid #1d2529;
+  font-size: 0.84rem;
+  color: #e2e8f0;
+  margin-bottom: 28px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.sagar-latest-ticker:hover {
+  border-color: #38bdf8;
+  background: rgba(20, 28, 33, 0.95);
+}
+
+.sagar-latest-badge {
+  background: #2563eb;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.sagar-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.sagar-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 11px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+  border: none;
+}
+
+.sagar-btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.45);
+}
+
+.sagar-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0e1417;
+  color: #e2e8f0;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 11px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid #1d2529;
+  transition: all 0.2s ease;
+}
+
+.sagar-btn-outline:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-1px);
+  background: #131a1e;
+}
+
+.sagar-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.sagar-social-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #0e1417;
+  border: 1px solid #1d2529;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.sagar-social-tile:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+.sagar-scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sagar-scroll-cue:hover {
+  color: #94a3b8;
+}
+
+/* Sagar Section Header */
+.sagar-section-header {
+  margin: 70px 0 34px;
+}
+
+.sagar-section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sagar-section-number {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.sagar-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.sagar-display-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.sagar-section-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.35) 0%, rgba(255, 255, 255, 0.05) 80%, transparent 100%);
+  position: relative;
+}
+
+/* Sagar Gupta Style Mascot Perch on Section Header Rule */
+.mascot-perch {
+  --mascot-h: 96px;
+  width: calc(var(--mascot-h) * 0.75);
+  pointer-events: none;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 8%, 72px);
+  z-index: 15;
+}
+
+@media (max-width: 768px) {
+  .mascot-perch {
+    --mascot-h: 74px;
+    right: 8px;
+  }
+}
+
+.mascot {
+  pointer-events: auto;
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+}
+
+.mascot-frame {
+  width: 100%;
+  height: var(--mascot-h);
+  background-repeat: no-repeat;
+  background-size: 800% 100%;
+  position: absolute;
+  left: 0;
+}
+
+.mascot-speech-bubble {
+  position: absolute;
+  bottom: calc(var(--mascot-h) * 0.65 + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(14, 20, 23, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 8px;
+  padding: 4px 10px;
+  color: #38bdf8;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 30;
+  animation: sagarBubbleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sagarBubbleIn {
+  from { opacity: 0; transform: translate(-50%, 4px) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.sagar-section-mascot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.sagar-mascot-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+/* About Section 2-Column Grid */
+.sagar-about-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 10px;
+}
+
+@media (max-width: 960px) {
+  .sagar-about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sagar-about-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.sagar-about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sagar-highlight-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .sagar-highlight-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sagar-highlight-card {
+  background: #0e1417;
+  border: 1px solid #1d2529;
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sagar-highlight-card:hover {
+  border-color: #2e3a40;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sagar-highlight-card.highlight-blue {
+  border-left: 3px solid #3b82f6;
+}
+
+.sagar-highlight-card.highlight-cyan {
+  border-left: 3px solid #06b6d4;
+}
+
+.sagar-highlight-card.highlight-green {
+  border-left: 3px solid #22c55e;
+}
+
+.sagar-highlight-card.highlight-amber {
+  border-left: 3px solid #f59e0b;
+}
+
+.sagar-highlight-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sagar-highlight-icon {
+  font-size: 1.1rem;
+}
+
+.sagar-highlight-title {
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.sagar-highlight-body {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* DevAvatar (Orbital Avatar) */
+.sagar-avatar-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.sagar-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sagar-orbit-ring-outer {
+  width: 270px;
+  height: 270px;
+  border: 1px dashed rgba(56, 189, 248, 0.2);
+  animation: sagar-spin 50s linear infinite;
+}
+
+.sagar-orbit-ring-inner {
+  width: 210px;
+  height: 210px;
+  border: 1px dashed rgba(37, 99, 235, 0.25);
+  animation: sagar-spin-reverse 40s linear infinite;
+}
+
+.sagar-center-avatar-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.25);
+  z-index: 2;
+}
+
+.sagar-avatar-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sagar-center-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.sagar-orbit-orbiters {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.sagar-orbit-node {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0e1417;
+  border: 1px solid #1d2529;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.sagar-orbit-node:hover {
+  transform: scale(1.25) !important;
+  border-color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  z-index: 10;
+}
+
+/* Timeline Spine Styling */
+.sagar-timeline-container {
+  position: relative;
+  padding-left: 32px;
+  margin-top: 24px;
+}
+
+.sagar-timeline-spine-track {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, #06b6d4, #2563eb 50%, #1d2529 100%);
+}
+
+.sagar-timeline-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.sagar-timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.sagar-timeline-bullet {
+  position: absolute;
+  top: 18px;
+  left: -28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0b1012;
+  border: 2px solid #06b6d4;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
+  z-index: 2;
+}
+
+.sagar-timeline-item.is-current .sagar-timeline-bullet {
+  border-color: #22c55e;
+  box-shadow: 0 0 12px #22c55e;
+}
+
+/* Contact 2-Column Section */
+.sagar-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 36px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .sagar-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sagar-contact-reachout-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sagar-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: #0e1417;
+  border: 1px solid #1d2529;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sagar-contact-card:hover {
+  border-color: #2e3a40;
+  transform: translateX(4px);
+  background: #131a1e;
+}
+
+.sagar-contact-card.contact-card-blue {
+  border-left: 3px solid #3b82f6;
+}
+
+.sagar-contact-card.contact-card-cyan {
+  border-left: 3px solid #06b6d4;
+}
+
+.sagar-contact-card.contact-card-green {
+  border-left: 3px solid #22c55e;
+}
+
+.sagar-contact-card.contact-card-amber {
+  border-left: 3px solid #f59e0b;
+}
+
+.sagar-contact-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.sagar-contact-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sagar-contact-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.sagar-contact-card-val {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sagar-contact-card-arrow {
+  margin-left: auto;
+  color: #64748b;
+  transition: transform 0.2s;
+}
+
+.sagar-contact-card:hover .sagar-contact-card-arrow {
+  transform: translate(3px, -3px);
+  color: #38bdf8;
+}
+
+/* Minimalist Footer */
+.sagar-footer {
+  margin-top: 80px;
+  padding: 36px 20px;
+  border-top: 1px solid #1d2529;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.sagar-footer-signature {
+  font-family: var(--font-signature);
+  font-size: 1.3rem;
+  color: #60a5fa;
+}
+
+/* Keyframes */
+@keyframes sagar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sagar-spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes sagar-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.15); }
+}
+
+/* Also ensure existing cards adapt to #0e1417 and #1d2529 border */
+.info-card,
+.timeline-card,
+.project-card,
+.leetcode-showcase-card {
+  background: #0e1417 !important;
+  border: 1px solid #1d2529 !important;
+}
+
+.info-card:hover,
+.timeline-card:hover,
+.project-card:hover,
+.leetcode-showcase-card:hover {
+  border-color: #2e3a40 !important;
+}
+
+
+/* ==========================================================================
+   Sagar Gupta Signature Animation Keyframes & Component Enhancements
+   ========================================================================== */
+
+/* Word reveal animation for rotating tagline */
+@keyframes sagarWordEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mouse Scroll Hint Animation */
+@keyframes scroll-hint {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-scroll-hint {
+  animation: scroll-hint 1.8s ease-in-out infinite;
+}
+
+/* Orbiting Tech Stack: clockwise ring + counter-rotating nodes */
+.sagar-orbit-ring-rotator {
+  position: absolute;
+  inset: 0;
+  animation: sagarOrbitSpin 48s linear infinite;
+  pointer-events: none;
+}
+
+.sagar-orbit-node-counter {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #0e1417;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  animation: sagarOrbitCounter 48s linear infinite;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.sagar-orbit-node-counter:hover {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5) !important;
+  transform: scale(1.2) !important;
+}
+
+@keyframes sagarOrbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sagarOrbitCounter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Center Avatar Glint sweep */
+.avatar-glint-sweep {
+  position: absolute;
+  top: -20%;
+  left: -50%;
+  width: 40%;
+  height: 140%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.avatar-glint-sweep.is-active {
+  animation: glintSweep 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes glintSweep {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Dashed category rules */
+.sagar-dashed-rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #8a97a0;
+  font-family: var(--font-mono, 'JetBrains Mono');
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 32px 0 20px;
+}
+
+.sagar-dashed-rule::after {
+  content: "";
+  flex: 1;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+/* Hero latest link */
+.sagar-hero-latest-link {
+  color: #9ca9b0;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.15);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.sagar-hero-latest-link:hover {
+  color: #60a5fa;
+  text-decoration-color: #60a5fa;
+}
+
+/* Scroll indicator mouse shape */
+.sagar-mouse-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #8a97a0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.sagar-mouse-scroll:hover {
+  color: #f4f6f7;
+}
+
+.sagar-mouse-shape {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sagar-mouse-wheel {
+  width: 3px;
+  height: 6px;
+  background: #38bdf8;
+  border-radius: 2px;
+  margin-top: 6px;
+}
+
+/* Mobile responsive styles for fixed NavBar */
+@media (max-width: 860px) {
+  .sagar-desktop-nav-cluster {
+    display: none !important;
+  }
+  .sagar-mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+/* Floating Stack Tiles on Side Rails */
+.sagar-stack-tile {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(14, 20, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  animation: sagarTileFloat 5s ease-in-out infinite alternate;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.sagar-stack-tile:hover {
+  border-color: #38bdf8;
+  transform: translateY(-4px) scale(1.1);
+}
+
+@keyframes sagarTileFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+/* Ambient Aurora Glow soft pulse */
+.sagar-aurora-glow {
+  animation: sagarAuroraPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes sagarAuroraPulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.06); }
+}
+
+/* Sagar Gupta Style Education Section Responsive Layout */
+@media (max-width: 768px) {
+  .sagar-education-section {
+    padding: 64px 16px !important;
+  }
+  .sagar-edu-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .sagar-edu-rail {
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding-right: 0 !important;
+    padding-left: 20px !important;
+  }
+  .sagar-edu-card {
+    padding: 18px 20px !important;
+  }
+}
 
