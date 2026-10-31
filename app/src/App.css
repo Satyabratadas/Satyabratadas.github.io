@@ -54,12 +54,14 @@ h1, h2, h3, .logo, .font-display, .hero-title-inline, .section-header h2, .hero-
   background: transparent;
   padding: 0;
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 2;
   pointer-events: auto;
+  overflow-x: hidden;
 }
 
 .portfolio header,
@@ -3495,7 +3497,8 @@ main {
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
   margin: 0;
 }
 
@@ -3813,14 +3816,16 @@ main {
 /* Contact 2-Column Section */
 .sagar-contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   gap: 36px;
   align-items: start;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (max-width: 860px) {
   .sagar-contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -3828,6 +3833,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-width: 0;
+  width: 100%;
 }
 
 .sagar-contact-card {
@@ -3840,6 +3847,16 @@ main {
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.2s ease;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sagar-contact-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .sagar-contact-card:hover {
@@ -4204,10 +4221,229 @@ main {
     align-items: flex-start !important;
     text-align: left !important;
     padding-right: 0 !important;
-    padding-left: 20px !important;
+    padding-left: 24px !important;
+    position: relative !important;
+  }
+  .sagar-edu-line {
+    right: auto !important;
+    left: 5px !important;
+    bottom: -32px !important;
+  }
+  .sagar-edu-node {
+    right: auto !important;
+    left: -1px !important;
+    top: 2px !important;
   }
   .sagar-edu-card {
-    padding: 18px 20px !important;
+    padding: 18px 18px !important;
+  }
+}
+
+/* Global Mobile Viewport Enhancements */
+@media (max-width: 900px) {
+  .sagar-stackfield-backdrop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .sagar-hero-section {
+    min-height: auto;
+    padding: 96px 16px 36px !important;
+  }
+
+  .sagar-section-title-row {
+    gap: 12px;
+  }
+
+  .sagar-display-heading {
+    font-size: clamp(1.45rem, 5.5vw, 1.85rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .sagar-section-header {
+    margin: 48px 0 24px !important;
+  }
+
+  /* Scale DevAvatar orbit so rotating nodes stay within mobile viewport */
+  .sagar-avatar-container {
+    transform: scale(0.85);
+    margin: 0 auto -20px;
+  }
+
+  /* Prevent background glow blobs from causing horizontal layout expansion */
+  .sagar-aurora-top {
+    width: 100vw !important;
+    max-width: 480px !important;
+    left: 50% !important;
+    margin-left: -240px !important;
+  }
+  .sagar-aurora-bottom-right,
+  .sagar-aurora-bottom-left,
+  .sagar-laser-beam {
+    display: none !important;
+  }
+
+  .mascot-perch {
+    right: 4px !important;
+  }
+  .mascot-speech-bubble {
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sagar-hero-headline {
+    font-size: clamp(1.75rem, 6.5vw, 2.25rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 14px;
+  }
+
+  .sagar-hero-subtitle {
+    font-size: 0.94rem !important;
+    line-height: 1.6 !important;
+    padding: 0 4px;
+    margin-bottom: 18px;
+  }
+
+  .sagar-status-pill {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .sagar-latest-ticker {
+    border-radius: 14px !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 10px 14px !important;
+    font-size: 0.8rem !important;
+    line-height: 1.45 !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .sagar-latest-badge {
+    margin-top: 1px;
+  }
+
+  .sagar-hero-creds-strip {
+    gap: 6px;
+  }
+
+  .sagar-cred-item {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+
+  .sagar-highlight-card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  .sagar-highlight-card {
+    padding: 14px 16px !important;
+  }
+
+  .timeline {
+    padding-left: 0 !important;
+    gap: 18px !important;
+  }
+
+  .timeline::before {
+    left: 4px !important;
+  }
+
+  .timeline::after {
+    left: 3px !important;
+  }
+
+  .timeline-item {
+    gap: 12px !important;
+    grid-template-columns: 10px minmax(0, 1fr) !important;
+  }
+
+  .timeline-marker {
+    width: 10px !important;
+    height: 10px !important;
+    margin-top: 22px !important;
+  }
+
+  .timeline-card {
+    padding: 18px 16px !important;
+  }
+
+  .timeline-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .timeline-top .pill {
+    align-self: flex-start !important;
+  }
+
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  #hackathons .cards-grid,
+  .projects-grid,
+  .cards-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .info-card,
+  .project-card {
+    padding: 18px 16px !important;
+  }
+
+  .sagar-contact-card {
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+
+  .sagar-contact-card-val {
+    font-size: 0.85rem !important;
+  }
+
+  .contact-card.info-card {
+    padding: 18px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sagar-avatar-container {
+    transform: scale(0.78);
+    margin: -15px auto -35px;
+  }
+
+  .sagar-hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .sagar-btn-primary,
+  .sagar-btn-outline {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .portfolio-header,
+  main,
+  .portfolio-footer {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
   }
 }
 

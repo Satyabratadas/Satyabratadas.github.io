@@ -54,13 +54,14 @@ export default function NavBar({ isNavOpen, setIsNavOpen }) {
       aria-label="Main Navigation"
     >
       <div
+        className="sagar-nav-inner"
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           height: '100%',
-          paddingLeft: '24px',
-          paddingRight: '24px',
+          paddingLeft: 'clamp(16px, 4vw, 24px)',
+          paddingRight: 'clamp(16px, 4vw, 24px)',
           maxWidth: '1280px',
           marginLeft: 'auto',
           marginRight: 'auto',
@@ -179,6 +180,23 @@ export default function NavBar({ isNavOpen, setIsNavOpen }) {
         </button>
       </div>
 
+      {/* Mobile dropdown backdrop */}
+      {isNavOpen && (
+        <div
+          onClick={() => setIsNavOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            top: '64px',
+            background: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
+            zIndex: 998,
+          }}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile dropdown */}
       {isNavOpen && (
         <div
@@ -189,10 +207,14 @@ export default function NavBar({ isNavOpen, setIsNavOpen }) {
             right: 0,
             background: '#0e1418',
             borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '16px 24px',
+            padding: '16px 20px 24px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '12px',
+            gap: '8px',
+            zIndex: 999,
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.8)',
+            maxHeight: 'calc(100dvh - 72px)',
+            overflowY: 'auto',
           }}
         >
           {navItems.map((item, index) => (
@@ -204,10 +226,10 @@ export default function NavBar({ isNavOpen, setIsNavOpen }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '10px 0',
+                padding: '12px 6px',
                 color: '#f4f6f7',
                 textDecoration: 'none',
-                fontSize: '15px',
+                fontSize: '15.5px',
                 fontWeight: 500,
                 borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
               }}
@@ -222,13 +244,14 @@ export default function NavBar({ isNavOpen, setIsNavOpen }) {
             href="#contact"
             onClick={() => setIsNavOpen(false)}
             style={{
-              marginTop: '8px',
-              padding: '10px 16px',
+              marginTop: '10px',
+              padding: '12px 16px',
               borderRadius: '8px',
               background: '#2563eb',
               color: '#ffffff',
               textAlign: 'center',
               fontWeight: 600,
+              fontSize: '14.5px',
               textDecoration: 'none',
             }}
           >

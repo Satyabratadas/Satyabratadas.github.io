@@ -1717,34 +1717,6 @@ function App() {
                       </a>
                       <span className="project-tooltip">View on GitHub</span>
                     </div>
-                    <div className="project-info-with-tooltip">
-                      <a
-                        href="https://155-138-224-207.sslip.io/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-info-icon"
-                        aria-label="View Backfill Live App"
-                        onClick={(e) => e.currentTarget.blur()}
-                        onMouseLeave={(e) => e.currentTarget.blur()}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                          <polyline points="15 3 21 3 21 9" />
-                          <line x1="10" y1="14" x2="21" y2="3" />
-                        </svg>
-                      </a>
-                      <span className="project-tooltip">View Live App</span>
-                    </div>
                   </div>
                 </div>
                 <span className="pill">🏆 Solana Track · Winner</span>
@@ -1815,34 +1787,6 @@ function App() {
                         </svg>
                       </a>
                       <span className="project-tooltip">View on GitHub</span>
-                    </div>
-                    <div className="project-info-with-tooltip">
-                      <a
-                        href="https://bendwith.us/welcome"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-info-icon"
-                        aria-label="View Bend With Us Live App"
-                        onClick={(e) => e.currentTarget.blur()}
-                        onMouseLeave={(e) => e.currentTarget.blur()}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                          <polyline points="15 3 21 3 21 9" />
-                          <line x1="10" y1="14" x2="21" y2="3" />
-                        </svg>
-                      </a>
-                      <span className="project-tooltip">View Live App</span>
                     </div>
                   </div>
                 </div>

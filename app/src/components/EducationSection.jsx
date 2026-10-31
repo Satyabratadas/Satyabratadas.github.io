@@ -116,6 +116,7 @@ export default function EducationSection({ educationRef }) {
                 {!isLast && (
                   <div
                     aria-hidden="true"
+                    className="sagar-edu-line"
                     style={{
                       position: 'absolute',
                       right: '-1px',
@@ -130,6 +131,7 @@ export default function EducationSection({ educationRef }) {
                 {/* Timeline Circle Node */}
                 <div
                   aria-hidden="true"
+                  className="sagar-edu-node"
                   style={{
                     position: 'absolute',
                     right: '-7px',

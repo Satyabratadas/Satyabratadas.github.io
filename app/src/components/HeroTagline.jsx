@@ -33,17 +33,20 @@ export default function HeroTagline() {
         fontWeight: 600,
         lineHeight: 1.5,
         color: 'var(--color-accent-cyan, #60a5fa)',
-        fontSize: 'clamp(0.95rem, 2vw, 1.15rem)',
-        minHeight: '30px',
+        fontSize: 'clamp(0.85rem, 2.4vw, 1.15rem)',
+        minHeight: 'auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '0 8px',
         overflow: 'hidden',
       }}
     >
       <div
         style={{
           display: 'inline-flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
           gap: '0.3em',
           transform: animating ? 'translateY(-16px) scale(0.96)' : 'translateY(0) scale(1)',
           opacity: animating ? 0 : 1,
